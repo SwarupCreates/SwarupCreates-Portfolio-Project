@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end; /* Right align the horizontal lines */
+}
+
+.line {
+  width: 12px;
+  height: 2px;
+  background-color: var(--text-secondary);
+  border-radius: 4px;
+  opacity: 0.4;
+  transition: all 0.3s ease;
+}
+
+.active {
+  width: 20px;
+  height: 4px;
+  background-color: var(--primary);
+  opacity: 1;
+}

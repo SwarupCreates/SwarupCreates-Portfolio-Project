@@ -1,0 +1,19 @@
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-optical-sizing: auto;
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text-primary);
+  font-variation-settings: normal;
+}
+
+h1 { font-size: clamp(2.5rem, 5vw, 4rem); }
+h2 { font-size: clamp(2rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.75rem, 3vw, 2.5rem); }
+h4 { font-size: clamp(1.5rem, 2vw, 2rem); }
+
+.text-body-large { font-size: 1.125rem; line-height: 1.75; }
+.text-body { font-size: 1rem; line-height: 1.5; }
+.text-body-small { font-size: 0.875rem; line-height: 1.5; }
+
+.text-secondary { color: var(--text-secondary); }

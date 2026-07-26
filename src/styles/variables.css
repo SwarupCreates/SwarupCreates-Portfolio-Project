@@ -1,0 +1,59 @@
+:root {
+  /* Colors - Light Mode First */
+  --primary: #005AC2;
+  --primary-light: #89CAFF;
+  --primary-transparent: #005AC232;
+  --text-primary: #1A1A1A;
+  --text-secondary: rgba(26, 26, 26, 0.6);
+  
+  /* Cursor Variables */
+  --cursor-arrow-stroke: #000000;
+  --cursor-arrow-fill: var(--primary-light);
+  --cursor-text-stroke: var(--text-primary);
+  
+  --surface: #F5F5F5;
+  --surface-hover: rgba(0, 90, 194, 0.1); /* Light blue translucent */
+  --background: #F5F5F5;
+  --border: rgba(26, 26, 26, 0.12);
+  
+  --error: #ef4444;
+  --success: #10b981;
+
+  /* Typography */
+  --font-heading: 'Stack Sans Notch', sans-serif;
+  --font-body: 'Google Sans Flex', sans-serif;
+
+  /* Spacing (8px system) */
+  --spacing-1: 0.5rem; /* 8px */
+  --spacing-1a: 0.75rem; /* 12px */
+  --spacing-2: 1rem;   /* 16px */
+  --spacing-3: 1.5rem; /* 24px */
+  --spacing-4: 2rem;   /* 32px */
+  --spacing-5: 2.5rem; /* 40px */
+  --spacing-6: 3rem;   /* 48px */
+  --spacing-8: 4rem;   /* 64px */
+  --spacing-10: 5rem;  /* 80px */
+  --spacing-12: 6rem;  /* 96px */
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-soft: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-large: 0 20px 25px -5px rgb(0 0 0 / 0.3), 0 8px 10px -6px rgb(0 0 0 / 0.3);
+
+  /* Transitions */
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Dark theme is disabled until colors are defined */
+[data-theme='dark'] {
+  --cursor-arrow-stroke: var(--primary-light);
+  --cursor-arrow-fill: var(--primary);
+  --cursor-text-stroke: #FFFFFF;
+}
