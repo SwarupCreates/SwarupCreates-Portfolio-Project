@@ -15,7 +15,7 @@ const TwiceTextCard = (props: SVGProps<SVGSVGElement>) => (
           width={253}
           height={107}
           rx={24}
-          fill="#DDDDDD"
+          fill="var(--card-twice)"
           stroke="var(--text-primary)"
           strokeWidth={2}
         />
@@ -26,7 +26,7 @@ const TwiceTextCard = (props: SVGProps<SVGSVGElement>) => (
           width={237}
           height={91}
           rx={18}
-          fill="#DDDDDD"
+          fill="var(--card-twice)"
           stroke="var(--text-primary)"
           strokeWidth={2}
           strokeDasharray="4 4"

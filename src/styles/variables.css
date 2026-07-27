@@ -6,6 +6,9 @@
   --text-primary: #333333;
   --text-secondary: rgba(51, 51, 51, 0.6);
   --logo-stroke-end: rgba(51, 51, 51, 0.10);
+  --card-thought: #FF9A9C;
+  --card-twice: #DDDDDD;
+  --card-code: #FFD09A;
   --bg-rgb: 245, 245, 245;
   --text-rgb: 51, 51, 51;
   
@@ -62,6 +65,9 @@
   --text-primary: #F5F5F5;
   --text-secondary: rgba(255, 255, 255, 0.6);
   --logo-stroke-end: rgba(255, 255, 255, 0.15);
+  --card-thought: #C7566E;
+  --card-twice: #595959;
+  --card-code: #C76F40;
   --bg-rgb: 0, 0, 0;
   --text-rgb: 245, 245, 245;
 

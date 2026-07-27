@@ -15,7 +15,7 @@ const CodeTextCard = (props: SVGProps<SVGSVGElement>) => (
           width={253}
           height={107}
           rx={24}
-          fill="#FFD09A"
+          fill="var(--card-code)"
           stroke="var(--text-primary)"
           strokeWidth={2}
         />
@@ -26,7 +26,7 @@ const CodeTextCard = (props: SVGProps<SVGSVGElement>) => (
           width={237}
           height={91}
           rx={18}
-          fill="#FFD09A"
+          fill="var(--card-code)"
           stroke="var(--text-primary)"
           strokeWidth={2}
           strokeDasharray="4 4"

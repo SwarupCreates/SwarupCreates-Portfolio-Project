@@ -15,7 +15,7 @@ const ThoughtTextCard = (props: SVGProps<SVGSVGElement>) => (
           width={253}
           height={107}
           rx={24}
-          fill="#FF9A9C"
+          fill="var(--card-thought)"
           stroke="var(--text-primary)"
           strokeWidth={2}
         />
@@ -26,7 +26,7 @@ const ThoughtTextCard = (props: SVGProps<SVGSVGElement>) => (
           width={237}
           height={91}
           rx={18}
-          fill="#FF9A9C"
+          fill="var(--card-thought)"
           stroke="var(--text-primary)"
           strokeWidth={2}
           strokeDasharray="4 4"
