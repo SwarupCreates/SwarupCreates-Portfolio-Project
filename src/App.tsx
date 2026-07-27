@@ -3,17 +3,22 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { MainLayout } from './layouts/MainLayout';
 import { Home } from './pages/Home';
 import { CustomCursor } from './components/CustomCursor/CustomCursor';
+import { DevTools } from './components/DevTools/DevTools';
+import { AnimationProvider } from './context/AnimationContext';
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <AnimationProvider>
+      <BrowserRouter>
       <CustomCursor />
+      <DevTools />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
         </Route>
       </Routes>
     </BrowserRouter>
+    </AnimationProvider>
   );
 };
 

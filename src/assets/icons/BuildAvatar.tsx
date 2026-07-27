@@ -2,16 +2,64 @@ import * as React from "react"
 import { SVGProps } from "react"
 const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
   <svg
+    width={287}
+    height={239}
     viewBox="0 0 287 239"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
+    <style>
+      {`
+        .active-avatar .build-cloud {
+          animation: floatCloud 4s infinite ease-in-out;
+        }
+        @keyframes floatCloud {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-7px); }
+        }
+
+        .active-avatar .build-hand {
+          animation: typeHand 2s infinite;
+        }
+        @keyframes typeHand {
+          0%, 10% { transform: translateX(0); }
+          15% { transform: translateX(3px) translateY(-1px); }
+          20% { transform: translateX(0); }
+          30% { transform: translateX(-3px) translateY(-1px); }
+          35%, 50% { transform: translateX(0); }
+          55% { transform: translateX(2px); }
+          60%, 100% { transform: translateX(0); }
+        }
+
+        /* Glitching lines of code */
+        .active-avatar g[id="Group 38029"] rect:nth-child(3n) {
+          animation: blinkCodeAndColor 3.5s infinite steps(1, start);
+          animation-delay: 0.2s;
+        }
+        .active-avatar g[id="Group 38029"] rect:nth-child(4n) {
+          animation: blinkCodeAndColorRed 4.2s infinite steps(1, start);
+          animation-delay: 1.1s;
+        }
+        .active-avatar g[id="Group 38029"] rect:nth-child(5n) {
+          animation: blinkCodeAndColor 2.2s infinite steps(1, start);
+          animation-delay: 0.5s;
+        }
+        @keyframes blinkCodeAndColor {
+          0%, 85% { fill: #299ee7; }
+          86%, 100% { fill: #ff4a4a; }
+        }
+        @keyframes blinkCodeAndColorRed {
+          0%, 75% { fill: #ff4a4a; }
+          76%, 100% { fill: #299ee7; }
+        }
+      `}
+    </style>
     <g id="Build">
-      <g id="Vector 3713">
+      <g id="Vector 3713" className="build-cloud">
         <path
           d="M61.2045 91.4248C76.9604 92.0615 84.7564 91.3776 88.2679 91.5195C104.298 92.1673 133.154 93.3334 133.799 77.3816C134.315 64.6202 124.992 60.6929 120.266 60.3244C114.735 38.2647 96.6999 41.7966 90.0944 46.323C81.9008 22.0253 50.9841 37.8188 58.0459 56.0636C53.6768 55.2628 49.3042 56.6735 45.4584 61.0295C37.2858 70.2863 41.5097 90.6289 61.2045 91.4248Z"
-          fill="#77CBFF"
+          fill="#299ee7"
         />
         <path
           d="M61.8895 74.4757C70.8283 68.9784 64.9378 57.3268 58.0459 56.0636M58.0459 56.0636C53.6768 55.2628 49.3042 56.6735 45.4584 61.0295C37.2857 70.2863 41.5097 90.6289 61.2045 91.4248C76.9604 92.0615 84.7564 91.3776 88.2679 91.5195C104.298 92.1673 133.154 93.3334 133.799 77.3816C134.315 64.6202 124.992 60.6929 120.266 60.3244C114.735 38.2647 96.6999 41.7966 90.0944 46.323M58.0459 56.0636C50.9841 37.8188 81.9008 22.0253 90.0944 46.323M90.0944 46.323C80.6118 53.9286 86.4224 69.076 95.6473 67.851C103.027 66.871 103.738 60.6226 102.932 57.8775"
@@ -25,7 +73,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
         <g id="Group 2770">
           <path
             id="Vector"
-            d="M266.097 237.071H105.005C106.06 230.624 107.798 220.642 109.617 211.434C110.526 206.828 111.456 202.418 112.33 198.74C113.206 195.058 114.023 192.121 114.707 190.458C115.039 189.649 115.697 188.775 116.631 187.856C117.565 186.937 118.765 185.983 120.167 185.008C122.975 183.06 126.585 181.047 130.479 179.108C138.263 175.233 147.163 171.676 152.994 169.58L153.031 169.563C153.069 169.544 153.101 169.52 153.131 169.492L159.061 163.562V164.045C159.061 164.073 159.067 164.098 159.078 164.12L159.123 164.422C160.385 172.73 163.842 182.556 172.071 188.16L172.27 188.295L172.284 188.304C172.301 188.312 172.318 188.316 172.335 188.319L170.031 209.397C170.02 209.5 170.093 209.593 170.196 209.605C170.299 209.616 170.391 209.541 170.402 209.438L172.929 186.323C172.933 186.283 172.933 186.246 172.926 186.208L172.914 186.171L170.447 178.214C173.73 176.815 178.927 174.085 183.896 170.369C188.791 166.706 193.48 162.071 195.876 156.803L202.307 162.283L202.342 162.311C202.38 162.335 202.423 162.354 202.468 162.364L203.051 162.493C209.186 163.867 218.532 166.31 227.407 169.347C231.99 170.917 236.442 172.643 240.262 174.462C244.086 176.283 247.262 178.191 249.3 180.119C251.335 182.04 253.268 185.391 255.056 189.635C256.843 193.876 258.478 198.991 259.923 204.422C262.724 214.944 264.813 226.643 265.919 235.453L266.024 236.297L266.097 237.071Z"
+            d="M266.097 237.071H105.005C106.06 230.624 107.798 220.642 109.617 211.434C110.526 206.828 111.456 202.418 112.33 198.74C113.206 195.058 114.023 192.121 114.707 190.458C115.039 189.649 115.697 188.775 116.631 187.856C117.565 186.937 118.765 185.983 120.167 185.008C122.975 183.06 126.585 181.047 130.479 179.108C138.263 175.233 147.163 171.676 152.994 169.58L153.031 169.563C153.069 169.544 153.101 169.52 153.131 169.492L159.061 163.562V164.045C159.061 164.073 159.067 164.098 159.078 164.12L159.123 164.422C160.385 172.73 163.842 182.556 172.071 188.16L172.27 188.295L172.285 188.304C172.301 188.312 172.318 188.316 172.335 188.319L170.031 209.397C170.02 209.5 170.093 209.593 170.196 209.605C170.299 209.616 170.391 209.541 170.402 209.438L172.929 186.323C172.933 186.283 172.933 186.246 172.926 186.208L172.914 186.171L170.447 178.214C173.73 176.815 178.927 174.085 183.896 170.369C188.791 166.706 193.48 162.071 195.876 156.803L202.307 162.283L202.342 162.311C202.38 162.335 202.423 162.354 202.468 162.364L203.051 162.493C209.186 163.867 218.532 166.31 227.407 169.347C231.99 170.917 236.442 172.643 240.262 174.462C244.086 176.283 247.262 178.191 249.3 180.119C251.335 182.04 253.268 185.391 255.056 189.635C256.843 193.876 258.478 198.991 259.923 204.422C262.724 214.944 264.813 226.643 265.919 235.453L266.024 236.297L266.097 237.071Z"
             fill="#E0E0E0"
           />
           <path
@@ -50,7 +98,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
           />
           <path
             id="Vector_6"
-            d="M237.571 56.5049L237.569 56.5068L233.831 53.9364C233.546 53.7414 233.167 54.002 233.25 54.3395C234.41 59.0191 235.841 69.674 233.19 78.844L233.135 79.0296C230.075 78.2178 227.447 79.0352 225.336 80.5407C222.861 82.3068 221.097 85.0104 220.148 87.1196L220.058 87.3221C217.857 83.4955 217.881 78.9415 217.739 74.3724C217.596 69.8259 217.285 65.2681 214.328 61.5614C212.86 59.7185 211.34 58.1379 209.87 56.6549C208.4 55.17 206.985 53.7882 205.713 52.3333C203.216 49.4779 201.285 46.3581 200.651 41.7141L200.621 41.4929C200.591 41.2491 200.336 41.0879 200.102 41.1854L200.079 41.1948C196.09 43.1465 190.09 43.2459 184.089 42.5297C178.282 41.8397 172.511 40.3904 168.632 39.1643L168.263 39.0462C167.894 38.928 167.605 39.3799 167.871 39.6649L172.913 45.0364C170.494 46.2719 163.13 48.2255 151.303 46.7744C139.57 45.3345 132.954 53.3645 130.784 58.1698L130.685 58.3948C130.685 58.3948 130.681 58.3985 130.677 58.3985H130.674L128.343 51.1559C128.248 50.8616 127.846 50.7941 127.68 51.0678L127.663 51.0959C126.781 52.8077 125.739 55.7006 125.298 58.9198C124.869 62.0564 125.01 65.523 126.442 68.5116C124.474 68.7722 122.619 69.104 120.891 69.4884L120.791 69.3665C113.759 60.5959 112.358 51.4315 113.509 43.4933C114.672 35.4858 118.431 28.725 121.635 24.889C121.849 24.6341 121.65 24.2741 121.342 24.2741H116.998C119.456 21.4055 123.943 17.3071 129.723 14.0036C135.509 10.6963 142.581 8.19147 150.202 8.50082C150.54 8.51394 150.737 8.09772 150.482 7.85212L146.499 4.03114C154.145 2.14127 166.007 0.746368 177.176 2.60436C188.35 4.46048 198.791 9.56387 203.66 20.6368C203.732 20.7981 203.887 20.8731 204.034 20.8656C204.18 20.8562 204.33 20.7587 204.369 20.5787L204.416 20.3687C204.641 19.2944 204.866 17.8789 204.954 16.4371C205.042 14.9522 204.988 13.4242 204.624 12.2168L204.588 12.1024C204.588 12.1024 204.587 12.0968 204.59 12.0893C204.594 12.0799 204.603 12.0668 204.617 12.0556C204.628 12.0481 204.639 12.0443 204.643 12.0424C209.056 15.7491 209.283 19.9675 208.771 21.9717C208.698 22.2605 208.974 22.5455 209.274 22.4461C213.653 20.9856 223.555 20.4568 231.313 29.1525L226.74 28.3332L226.699 28.3275C226.491 28.3125 226.354 28.4775 226.301 28.6088C226.245 28.7475 226.236 28.9744 226.414 29.1112L226.573 29.2387C229.969 31.9648 235.591 40.0417 237.571 56.5049Z"
+            d="M237.571 56.5049L237.569 56.5068L233.831 53.9364C233.546 53.7414 233.167 54.002 233.25 54.3395C234.41 59.0191 235.841 69.674 233.19 78.844L233.135 79.0296C230.075 78.2178 227.447 79.0352 225.336 80.5407C222.861 82.3068 221.097 85.0104 220.148 87.1196L220.058 87.3221C217.857 83.4955 217.881 78.9415 217.739 74.3724C217.596 69.8259 217.285 65.2681 214.328 61.5614C212.86 59.7185 211.34 58.1379 209.87 56.6549C208.4 55.17 206.985 53.7882 205.713 52.3333C203.216 49.4779 201.285 46.3581 200.651 41.7141L200.621 41.4929C200.591 41.2491 200.336 41.0879 200.102 41.1854L200.079 41.1948C196.09 43.1465 190.09 43.2459 184.089 42.5297C178.282 41.8397 172.511 40.3904 168.632 39.1643L168.263 39.0462C167.894 38.928 167.605 39.3799 167.871 39.6649L172.913 45.0364C170.494 46.2719 163.13 48.2255 151.303 46.7744C139.57 45.3345 132.954 53.3645 130.784 58.1698L130.685 58.3948C130.685 58.3948 130.681 58.3985 130.677 58.3985H130.674L128.343 51.1559C128.248 50.8616 127.846 50.7941 127.68 51.0678L127.663 51.0959C126.781 52.8077 125.739 55.7006 125.298 58.9198C124.869 62.0564 125.01 65.523 126.442 68.5116C124.474 68.7722 122.619 69.104 120.891 69.4884L120.791 69.3665C113.759 60.5959 112.358 51.4315 113.509 43.4933C114.672 35.4858 118.431 28.725 121.635 24.889C121.849 24.6341 121.65 24.2741 121.342 24.2741H116.998C119.456 21.4055 123.943 17.3071 129.723 14.0036C135.509 10.6963 142.581 8.19147 150.202 8.50082C150.54 8.51394 150.737 8.09772 150.482 7.85212L146.499 4.03114C154.145 2.14127 166.007 0.746368 177.176 2.60436C188.35 4.46048 198.791 9.56387 203.66 20.6368C203.732 20.7981 203.887 20.8731 204.034 20.8656C204.18 20.8562 204.33 20.7587 204.369 20.5787L204.416 20.3687C204.641 19.2944 204.866 17.8789 204.954 16.4371C205.042 14.9522 204.988 13.4242 204.624 12.2168L204.588 12.1024C204.588 12.1024 204.587 12.0968 204.59 12.0893C204.594 12.0799 204.603 12.0668 204.617 12.0556C204.628 12.0481 204.639 12.0443 204.643 12.0424C209.056 15.7491 209.283 19.9675 208.771 21.9717C208.698 22.2605 208.974 22.5455 209.274 22.4461C213.653 20.9856 223.555 20.4569 231.313 29.1525L226.74 28.3332L226.699 28.3275C226.491 28.3125 226.354 28.4775 226.301 28.6088C226.245 28.7475 226.236 28.9744 226.414 29.1112L226.573 29.2387C229.969 31.9648 235.591 40.0417 237.571 56.5049Z"
             fill="#2D2D2D"
           />
           <g id="Mask group">
@@ -71,7 +119,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                   fill="#606060"
                 />
                 <path
-                  d="M168.672 68.5532C189.163 62.1516 205.653 65.3505 213.566 68.6546C215.221 69.3458 216.095 71.0872 215.941 72.8742C215.136 82.2103 214.476 94.7376 207.811 98.5369C202.323 101.665 189.623 104.795 176.965 98.9268C167.971 94.7575 165.882 81.3746 165.725 72.594C165.692 70.74 166.902 69.1061 168.672 68.5532Z"
+                  d="M168.672 68.5532C189.163 62.1516 205.653 65.3505 213.566 68.6546C215.221 69.3458 216.095 71.0872 215.941 72.8742C215.136 82.2103 214.476 94.7376 207.811 98.5368C202.323 101.665 189.623 104.795 176.965 98.9268C167.971 94.7575 165.882 81.3746 165.725 72.594C165.692 70.74 166.902 69.1061 168.672 68.5532Z"
                   fill="#606060"
                 />
               </g>
@@ -86,7 +134,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={78.0312}
                       width={55.9024}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 881"
@@ -94,7 +142,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={81.5254}
                       width={15.1402}
                       height={2.32927}
-                      fill="#FF7777"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 867"
@@ -102,7 +150,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={64.0557}
                       width={15.1402}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 882"
@@ -110,7 +158,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={85.0186}
                       width={37.2683}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 883"
@@ -118,7 +166,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={85.0186}
                       width={16.3049}
                       height={2.32927}
-                      fill="#FF7777"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 884"
@@ -126,7 +174,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={81.5254}
                       width={8.15244}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 870"
@@ -134,7 +182,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={64.0557}
                       width={10.4817}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 869"
@@ -142,7 +190,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={64.0557}
                       width={15.1402}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 868"
@@ -150,7 +198,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={64.0557}
                       width={8.15244}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 885"
@@ -158,7 +206,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={81.5254}
                       width={27.9512}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 871"
@@ -166,7 +214,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={67.5498}
                       width={15.1402}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 872"
@@ -174,7 +222,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={74.5371}
                       width={15.1402}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 873"
@@ -182,7 +230,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={71.043}
                       width={37.2683}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 874"
@@ -190,7 +238,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={71.043}
                       width={16.3049}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 875"
@@ -198,7 +246,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={67.5498}
                       width={8.15244}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 876"
@@ -206,7 +254,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={74.5371}
                       width={10.4817}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 877"
@@ -214,7 +262,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={74.5371}
                       width={15.1402}
                       height={2.32927}
-                      fill="#FF7777"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 878"
@@ -222,7 +270,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={74.5371}
                       width={8.15244}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 879"
@@ -230,7 +278,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={67.5498}
                       width={27.9512}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                   </g>
                   <g id="Group 38026">
@@ -240,7 +288,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={88.5127}
                       width={55.9024}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 862"
@@ -248,7 +296,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={92.0068}
                       width={15.1402}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 865"
@@ -256,7 +304,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={95.501}
                       width={37.2683}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 866"
@@ -264,7 +312,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={95.501}
                       width={16.3049}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 863"
@@ -272,7 +320,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={92.0068}
                       width={8.15244}
                       height={2.32927}
-                      fill="#FF7777"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 867_2"
@@ -280,7 +328,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={98.9941}
                       width={15.1402}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 864"
@@ -288,7 +336,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={92.0068}
                       width={27.9512}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 870_2"
@@ -296,7 +344,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={98.9941}
                       width={10.4817}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 869_2"
@@ -304,7 +352,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={98.9941}
                       width={15.1402}
                       height={2.32927}
-                      fill="#FF7777"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 868_2"
@@ -312,7 +360,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={98.9941}
                       width={8.15244}
                       height={2.32927}
-                      fill="#FF7777"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 871_2"
@@ -320,7 +368,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={102.488}
                       width={15.1402}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 875_2"
@@ -328,7 +376,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={102.488}
                       width={8.15244}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 879_2"
@@ -336,7 +384,7 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={102.488}
                       width={27.9512}
                       height={2.32927}
-                      fill="#77CBFF"
+                      fill="#299ee7"
                     />
                   </g>
                 </g>
@@ -348,8 +396,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={97.8301}
                       width={55.9024}
                       height={2.32927}
-                      transform="rotate(-180 221.28 97.8301)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 97.8301)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 881_2"
@@ -357,8 +405,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={94.3359}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 221.28 94.3359)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 94.3359)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 882_2"
@@ -366,8 +414,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={90.8418}
                       width={37.2683}
                       height={2.32927}
-                      transform="rotate(-180 221.28 90.8418)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 90.8418)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 883_2"
@@ -375,8 +423,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={90.8418}
                       width={16.3049}
                       height={2.32927}
-                      transform="rotate(-180 182.848 90.8418)"
-                      fill="#FF7777"
+                      transform="rotate(180 182.848 90.8418)"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 884_2"
@@ -384,8 +432,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={94.3359}
                       width={8.15244}
                       height={2.32927}
-                      transform="rotate(-180 204.976 94.3359)"
-                      fill="#FF7777"
+                      transform="rotate(180 204.976 94.3359)"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 885_2"
@@ -393,8 +441,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={94.3359}
                       width={27.9512}
                       height={2.32927}
-                      transform="rotate(-180 195.658 94.3359)"
-                      fill="#77CBFF"
+                      transform="rotate(180 195.658 94.3359)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 872_2"
@@ -402,8 +450,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={101.324}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 221.28 101.324)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 101.324)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 873_2"
@@ -411,8 +459,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={104.817}
                       width={37.2683}
                       height={2.32927}
-                      transform="rotate(-180 221.28 104.817)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 104.817)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 874_2"
@@ -420,8 +468,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={104.817}
                       width={16.3049}
                       height={2.32927}
-                      transform="rotate(-180 182.848 104.817)"
-                      fill="#77CBFF"
+                      transform="rotate(180 182.848 104.817)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 876_2"
@@ -429,8 +477,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={101.324}
                       width={10.4817}
                       height={2.32927}
-                      transform="rotate(-180 179.354 101.324)"
-                      fill="#77CBFF"
+                      transform="rotate(180 179.354 101.324)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 877_2"
@@ -438,8 +486,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={101.324}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 195.658 101.324)"
-                      fill="#77CBFF"
+                      transform="rotate(180 195.658 101.324)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 878_2"
@@ -447,8 +495,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={101.324}
                       width={8.15244}
                       height={2.32927}
-                      transform="rotate(-180 204.976 101.324)"
-                      fill="#77CBFF"
+                      transform="rotate(180 204.976 101.324)"
+                      fill="#299ee7"
                     />
                   </g>
                   <g id="Group 38026_2">
@@ -458,8 +506,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={87.3486}
                       width={55.9024}
                       height={2.32927}
-                      transform="rotate(-180 221.28 87.3486)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 87.3486)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 862_2"
@@ -467,8 +515,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={83.8545}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 221.28 83.8545)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 83.8545)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 865_2"
@@ -476,8 +524,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={80.3604}
                       width={37.2683}
                       height={2.32927}
-                      transform="rotate(-180 221.28 80.3604)"
-                      fill="#FF7777"
+                      transform="rotate(180 221.28 80.3604)"
+                      fill="#ff4a4a"
                     />
                     <rect
                       id="Rectangle 866_2"
@@ -485,8 +533,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={80.3604}
                       width={16.3049}
                       height={2.32927}
-                      transform="rotate(-180 182.848 80.3604)"
-                      fill="#77CBFF"
+                      transform="rotate(180 182.848 80.3604)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 863_2"
@@ -494,8 +542,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={83.8545}
                       width={8.15244}
                       height={2.32927}
-                      transform="rotate(-180 204.976 83.8545)"
-                      fill="#77CBFF"
+                      transform="rotate(180 204.976 83.8545)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 867_3"
@@ -503,8 +551,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={76.8662}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 221.28 76.8662)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 76.8662)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 864_2"
@@ -512,8 +560,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={83.8545}
                       width={27.9512}
                       height={2.32927}
-                      transform="rotate(-180 195.658 83.8545)"
-                      fill="#77CBFF"
+                      transform="rotate(180 195.658 83.8545)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 870_3"
@@ -521,8 +569,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={76.8662}
                       width={10.4817}
                       height={2.32927}
-                      transform="rotate(-180 179.354 76.8662)"
-                      fill="#77CBFF"
+                      transform="rotate(180 179.354 76.8662)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 869_3"
@@ -530,8 +578,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={76.8662}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 195.658 76.8662)"
-                      fill="#77CBFF"
+                      transform="rotate(180 195.658 76.8662)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 868_3"
@@ -539,8 +587,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={76.8662}
                       width={8.15244}
                       height={2.32927}
-                      transform="rotate(-180 204.976 76.8662)"
-                      fill="#77CBFF"
+                      transform="rotate(180 204.976 76.8662)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 871_3"
@@ -548,8 +596,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={73.373}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 221.28 73.373)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 73.373)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 872_3"
@@ -557,8 +605,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={66.3848}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 221.28 66.3848)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 66.3848)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 873_3"
@@ -566,8 +614,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={69.8789}
                       width={37.2683}
                       height={2.32927}
-                      transform="rotate(-180 221.28 69.8789)"
-                      fill="#77CBFF"
+                      transform="rotate(180 221.28 69.8789)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 874_3"
@@ -575,8 +623,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={69.8789}
                       width={16.3049}
                       height={2.32927}
-                      transform="rotate(-180 182.848 69.8789)"
-                      fill="#77CBFF"
+                      transform="rotate(180 182.848 69.8789)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 875_3"
@@ -584,8 +632,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={73.373}
                       width={8.15244}
                       height={2.32927}
-                      transform="rotate(-180 204.976 73.373)"
-                      fill="#77CBFF"
+                      transform="rotate(180 204.976 73.373)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 876_3"
@@ -593,8 +641,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={66.3848}
                       width={10.4817}
                       height={2.32927}
-                      transform="rotate(-180 179.354 66.3848)"
-                      fill="#77CBFF"
+                      transform="rotate(180 179.354 66.3848)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 877_3"
@@ -602,8 +650,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={66.3848}
                       width={15.1402}
                       height={2.32927}
-                      transform="rotate(-180 195.658 66.3848)"
-                      fill="#77CBFF"
+                      transform="rotate(180 195.658 66.3848)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 878_3"
@@ -611,8 +659,8 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={66.3848}
                       width={8.15244}
                       height={2.32927}
-                      transform="rotate(-180 204.976 66.3848)"
-                      fill="#77CBFF"
+                      transform="rotate(180 204.976 66.3848)"
+                      fill="#299ee7"
                     />
                     <rect
                       id="Rectangle 879_3"
@@ -620,15 +668,15 @@ const BuildAvatar = (props: SVGProps<SVGSVGElement>) => (
                       y={73.373}
                       width={27.9512}
                       height={2.32927}
-                      transform="rotate(-180 195.658 73.373)"
-                      fill="#FF7777"
+                      transform="rotate(180 195.658 73.373)"
+                      fill="#ff4a4a"
                     />
                   </g>
                 </g>
               </g>
             </g>
           </g>
-          <g id="Vector 3712">
+          <g id="Vector 3712" className="build-hand">
             <path
               d="M188.267 226.571C181.279 225.988 185.355 196.872 208.648 202.113C216.218 203.861 231.941 212.013 227.282 223.077C223.555 231.928 217.262 230.259 214.581 228.318C212.648 230.032 210.626 230.575 209.414 228.318C209.354 228.518 209.293 228.712 209.23 228.9C208.066 232.394 201.078 231.229 200.909 226.571C200.501 227.277 199.988 227.88 199.331 228.318C195.837 230.647 192.925 228.318 192.925 224.242C192.537 225.018 191.062 226.571 188.267 226.571Z"
               fill="#A5A5A5"

@@ -7,7 +7,8 @@ const FlyingPlane = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
-    <path
+    <g transform="scale(1, -1) translate(0, -60)">
+      <path
       d="M74.0705 58.9652C59.2031 58.048 27.0432 56.0502 1.99609 45.4271L68.407 45.4219C68.7872 45.4218 69.1346 45.6374 69.3033 45.9781L75.0193 57.5215C75.3607 58.2109 74.8384 59.0125 74.0705 58.9652Z"
       fill="#004A9E"
       stroke="#1A1A1A"
@@ -55,6 +56,7 @@ const FlyingPlane = (props: SVGProps<SVGSVGElement>) => (
       }}
       strokeWidth={2}
     />
+    </g>
   </svg>
 )
 export { FlyingPlane as ReactComponent }

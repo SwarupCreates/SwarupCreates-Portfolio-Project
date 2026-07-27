@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Solitreo&display=swap');
+
 .planeWrapper {
   position: absolute;
   top: 0;
@@ -5,4 +7,93 @@
   will-change: transform;
   pointer-events: none;
   z-index: 5;
+}
+
+.landed {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+@keyframes floatyJiggle {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-5px, -15px) rotate(-8deg); }
+  50% { transform: translate(5px, -5px) rotate(5deg); }
+  75% { transform: translate(-3px, -10px) rotate(-3deg); }
+}
+
+.jiggling {
+  animation: floatyJiggle 1s ease-in-out infinite;
+  transform-origin: center center;
+}
+
+.unrotatedWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 6;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.connectTooltip {
+  position: absolute;
+  top: 36px;
+  left: 50%;
+  width: max-content;
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  background: #f5f5f5;
+  padding: 18px;
+  border-radius: 32px;
+  border: 2px solid rgba(26, 26, 26, 0.267);
+}
+
+.connectTooltip::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  background: #F8F9FA;
+  border-top: 2px solid rgba(26, 26, 26, 0.267);
+  border-left: 2px solid rgba(26, 26, 26, 0.267);
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.connectText {
+  font-family: 'Solitreo', cursive;
+  font-weight: 400;
+  color: #000;
+  font-size: 24px;
+  line-height: 1;
+  text-align: left;
+}
+
+.connectBtn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #005ec9;
+  border: 2px solid #005ec9;
+  padding: 12px 16px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: 'Google Sans', var(--sans);
+  font-weight: 600;
+  font-size: 16px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.connectBtn:hover {
+  background: #005ec9;
+  color: #fff;
+  transform: scale(1.05);
 }

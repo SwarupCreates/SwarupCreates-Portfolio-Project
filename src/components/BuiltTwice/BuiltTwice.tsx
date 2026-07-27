@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { motion, useScroll, useTransform, useSpring, AnimatePresence, useInView } from 'framer-motion';
+import { motion, useScroll, useTransform, useSpring, AnimatePresence, useInView, useMotionValueEvent } from 'framer-motion';
 import { PaperPlaneAnimation } from '../PaperPlaneAnimation/PaperPlaneAnimation';
 import {
   BuildAvatar,
@@ -10,6 +10,7 @@ import {
   ThoughtTextCard,
   TwiceTextCard
 } from '../../assets/icons';
+import { useAnimationConfig } from '../../context/AnimationContext';
 import styles from './BuiltTwice.module.css';
 
 const avatarData = [
@@ -30,12 +31,55 @@ const avatarData = [
   }
 ];
 
+const TypewriterText: React.FC<{ text: string }> = ({ text }) => {
+  const [displayedText, setDisplayedText] = useState('');
+  
+  useEffect(() => {
+    let i = 0;
+    setDisplayedText('');
+    const interval = setInterval(() => {
+      if (i <= text.length) {
+        setDisplayedText(text.slice(0, i));
+        i++;
+      } else {
+        clearInterval(interval);
+      }
+    }, 20); // 20ms per character
+    return () => clearInterval(interval);
+  }, [text]);
+
+  return <span>{displayedText}</span>;
+};
+
 export const BuiltTwice: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end end"]
+    offset: ["start center", "end end"]
   });
+
+  const { config, isScrubbing, globalProgress, replayKey } = useAnimationConfig();
+  
+  const mapScale = (val: number) => 1 + (val / 100);
+
+  const interpolate = (element: keyof typeof config, prop: 'x' | 'y' | 'rotate' | 'scale') => {
+    const start = config[element].initial[prop];
+    const end = config[element].final[prop];
+    return start + (end - start) * (globalProgress / 100);
+  };
+
+  const getActiveState = (element: keyof typeof config, isActive: boolean) => {
+    if (isScrubbing) {
+      return {
+        x: interpolate(element, 'x'),
+        y: interpolate(element, 'y'),
+        rotate: interpolate(element, 'rotate'),
+        scale: interpolate(element, 'scale'),
+        speed: config[element].final.speed
+      };
+    }
+    return isActive ? config[element].final : config[element].initial;
+  };
 
   const [isMobile, setIsMobile] = useState(false);
   const [pathScale, setPathScale] = useState(1);
@@ -44,7 +88,7 @@ export const BuiltTwice: React.FC = () => {
       const mobile = window.innerWidth <= 1024;
       setIsMobile(mobile);
       const idealWidth = mobile ? 427 : 1692;
-      setPathScale(window.innerWidth / idealWidth);
+      setPathScale((window.innerWidth / idealWidth) * 0.90); // Scale down slightly so it doesn't touch edges
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -53,6 +97,10 @@ export const BuiltTwice: React.FC = () => {
   
   // Text Reveal Mask (0 to 100%) mapped from 0.1 to 0.4 of scroll
   const textRevealProgress = useTransform(scrollYProgress, [0.1, 0.4], [0, 100]);
+  
+  // Plane & Path scroll progress mapped from 0.0 to 0.8 of scroll
+  const planeScrollProgress = useTransform(scrollYProgress, [0.0, 0.8], [0, 1]);
+  const pathLengthScroll = useTransform(scrollYProgress, [0.0, 0.8], [0, 0.96]);
   
   // Twice sticker pops in when text is fully revealed
   const twiceScale = useTransform(scrollYProgress, [0.35, 0.45], [0, 1]);
@@ -63,41 +111,39 @@ export const BuiltTwice: React.FC = () => {
 
   // Avatar Slideshow
   const [activeIndex, setActiveIndex] = useState(0);
-  const [isHoveringAvatar, setIsHoveringAvatar] = useState(false);
-  const [userClicked, setUserClicked] = useState(false);
 
   const avatarsRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(avatarsRef, { once: true, amount: 0.3 });
-  const [animationStage, setAnimationStage] = useState<'hidden' | 'entering' | 'done'>('hidden');
+  
+  const [scrollPhase, setScrollPhase] = useState<'hidden' | 'avatars_in' | 'slideshow'>('hidden');
 
-  useEffect(() => {
-    if (isInView && animationStage === 'hidden') {
-      setAnimationStage('entering');
+  useMotionValueEvent(scrollYProgress, "change", (latest) => {
+    if (latest < 0.15) {
+      if (scrollPhase !== 'hidden') setScrollPhase('hidden');
+    } else if (latest >= 0.15 && latest < 0.8) {
+      if (scrollPhase !== 'avatars_in') setScrollPhase('avatars_in');
+    } else if (latest >= 0.8) {
+      if (scrollPhase !== 'slideshow') setScrollPhase('slideshow');
     }
-  }, [isInView, animationStage]);
+  });
+
+  const isHidden = scrollPhase === 'hidden';
+  const isAvatarsIn = scrollPhase === 'avatars_in';
+  const isSlideshow = scrollPhase === 'slideshow';
 
   useEffect(() => {
-    if (animationStage === 'entering') {
-      const timer = setTimeout(() => {
-        setAnimationStage('done');
-      }, 1500);
-      return () => clearTimeout(timer);
+    if (!isSlideshow) {
+      setActiveIndex(0);
+      return;
     }
-  }, [animationStage]);
-
-  useEffect(() => {
-    if (isHoveringAvatar || userClicked || animationStage !== 'done') return;
-    
     const interval = setInterval(() => {
       setActiveIndex((prev) => (prev + 1) % 3);
-    }, 4000);
+    }, 10000); // 10 seconds
     return () => clearInterval(interval);
-  }, [isHoveringAvatar, userClicked, animationStage]);
+  }, [isSlideshow]);
 
   const handleAvatarClick = (index: number) => {
-    if (animationStage === 'done') {
+    if (isSlideshow) {
       setActiveIndex(index);
-      setUserClicked(true);
     }
   };
 
@@ -111,37 +157,60 @@ export const BuiltTwice: React.FC = () => {
   const pathRef = useRef<SVGPathElement>(null);
   const planeInView = useInView(containerRef, { once: false, margin: "100px 0px 0px 0px" });
 
+  const flightPathState = getActiveState('flightPath', planeInView);
+  const planeState = getActiveState('plane', planeInView);
+  const thoughtState = getActiveState('thoughtCard', isHoveringText);
+  const codeState = getActiveState('codeCard', isHoveringText);
+  const twiceState = getActiveState('twiceCard', isHoveringText);
+
   return (
-    <div className={styles.container} ref={containerRef}>
+    <div className={styles.container} ref={containerRef} key={replayKey}>
       <div className={styles.stickySection}>
         
         {/* Background Path & Plane */}
         <div 
           className={styles.pathContainer}
           style={{ 
-            transform: `translate(-50%, -50%) scale(${pathScale})`,
+            transform: `translate(calc(-46% + ${flightPathState.x}px), calc(-50% + ${flightPathState.y}px)) scale(${pathScale * mapScale(flightPathState.scale)}) rotate(${flightPathState.rotate}deg)`,
             width: isMobile ? '427px' : '1692px',
-            height: isMobile ? '281px' : '365px'
+            height: isMobile ? '281px' : '365px',
+            transition: isScrubbing ? 'none' : 'transform 1s ease'
           }}
         >
           {/* Procedural Path Line */}
           <svg width={isMobile ? 427 : 1692} height={isMobile ? 281 : 365} viewBox={viewBox} fill="none" xmlns="http://www.w3.org/2000/svg">
-            <motion.path
+            <defs>
+              <mask id="trail-mask">
+                <motion.path
+                  d={currentPath}
+                  stroke="white"
+                  strokeWidth="8"
+                  fill="none"
+                  style={{ pathLength: isScrubbing ? (globalProgress / 100) * 0.96 : pathLengthScroll }}
+                />
+              </mask>
+            </defs>
+            <path
               ref={pathRef}
               d={currentPath}
               stroke="#1A1A1A"
-              strokeOpacity="0.64"
+              strokeOpacity="0.48"
               strokeWidth="2"
               strokeLinecap="round"
-              strokeDasharray="2 12"
-              initial={{ pathLength: 0 }}
-              animate={{ pathLength: planeInView ? 1 : 0 }}
-              transition={{ duration: 4, ease: [0.645, 0.045, 0.355, 1.000] }} // Match easeInOutCubic approx
+              strokeDasharray="4 8"
+              mask="url(#trail-mask)"
             />
           </svg>
           
-          <PaperPlaneAnimation pathRef={pathRef} autoPlay={planeInView} duration={4000}>
-            <FlyingPlane style={{ width: '100%', height: '100%' }} />
+          <PaperPlaneAnimation 
+            pathRef={pathRef} 
+            progressOverride={isScrubbing ? globalProgress / 100 : planeScrollProgress}
+          >
+            <FlyingPlane style={{ 
+              width: '100%', 
+              height: '100%', 
+              transform: `translateY(-5px) translate(${planeState.x}px, ${planeState.y}px) scale(${mapScale(planeState.scale)}) rotate(${planeState.rotate}deg)`
+            }} />
           </PaperPlaneAnimation>
         </div>
 
@@ -168,18 +237,21 @@ export const BuiltTwice: React.FC = () => {
               <span>built</span>
             </motion.div>
             
-            <div className={styles.twiceContainer}>
+            <motion.div 
+              className={styles.twiceContainer}
+              style={{ scale: twiceScaleSpring }}
+            >
               {/* Thought Card - Back */}
               <motion.div 
                 className={`${styles.hoverCard} ${styles.thoughtCard}`}
                 initial={false}
                 animate={{ 
-                  x: isHoveringText ? 60 : 0, 
-                  y: isHoveringText ? -30 : 0,
-                  rotate: isHoveringText ? 15 : 0,
-                  opacity: twiceScaleSpring.get() > 0.1 ? 1 : 0
+                  x: thoughtState.x, 
+                  y: thoughtState.y,
+                  rotate: thoughtState.rotate,
+                  scale: mapScale(thoughtState.scale)
                 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: thoughtState.speed * 6, damping: 20 }}
               >
                 <ThoughtTextCard style={{ width: '100%', height: '100%' }} />
               </motion.div>
@@ -189,24 +261,33 @@ export const BuiltTwice: React.FC = () => {
                 className={`${styles.hoverCard} ${styles.codeCard}`}
                 initial={false}
                 animate={{ 
-                  x: isHoveringText ? 30 : 0, 
-                  y: isHoveringText ? 40 : 0,
-                  rotate: isHoveringText ? 10 : 0,
-                  opacity: twiceScaleSpring.get() > 0.1 ? 1 : 0
+                  x: codeState.x, 
+                  y: codeState.y,
+                  rotate: codeState.rotate,
+                  scale: mapScale(codeState.scale)
                 }}
-                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: codeState.speed * 6, damping: 20 }}
               >
                 <CodeTextCard style={{ width: '100%', height: '100%' }} />
               </motion.div>
 
               {/* Twice Card - Front */}
-              <motion.div 
-                className={styles.twiceSticker}
-                style={{ scale: twiceScaleSpring }}
-              >
-                <TwiceTextCard style={{ width: '100%', height: '100%' }} />
-              </motion.div>
-            </div>
+              <div className={styles.twiceSticker}>
+                <motion.div
+                  initial={false}
+                  animate={{
+                    x: twiceState.x,
+                    y: twiceState.y,
+                    rotate: twiceState.rotate,
+                    scale: mapScale(twiceState.scale)
+                  }}
+                  transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: twiceState.speed * 6, damping: 20 }}
+                  style={{ width: '100%', height: '100%' }}
+                >
+                  <TwiceTextCard style={{ width: '100%', height: '100%' }} />
+                </motion.div>
+              </div>
+            </motion.div>
           </motion.div>
           
           <motion.div 
@@ -219,28 +300,27 @@ export const BuiltTwice: React.FC = () => {
 
         <div 
           className={styles.avatarsSection}
-          onMouseEnter={() => setIsHoveringAvatar(true)}
-          onMouseLeave={() => setIsHoveringAvatar(false)}
           ref={avatarsRef}
         >
           <div className={styles.sharedBubbleContainer}>
             <AnimatePresence>
-              {animationStage === 'done' && (
+              {isSlideshow && (
                 <motion.div 
                   className={styles.sharedBubble}
-                  initial={{ opacity: 0, y: 10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 10 }}
+                  initial={{ opacity: 0, scale: 0, y: 30, transformOrigin: 'bottom center' }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0, y: 30 }}
+                  transition={{ type: "spring", bounce: 0.5, duration: 0.6 }}
                 >
                   <AnimatePresence mode="wait">
                     <motion.div
                       key={activeIndex}
-                      initial={{ opacity: 0, y: 5 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -5 }}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {avatarData[activeIndex].text}
+                      <TypewriterText text={avatarData[activeIndex].text} />
                     </motion.div>
                   </AnimatePresence>
                 </motion.div>
@@ -253,8 +333,8 @@ export const BuiltTwice: React.FC = () => {
                   <motion.div 
                     className={styles.notch}
                     animate={{ 
-                      opacity: (animationStage === 'done' && activeIndex === index) ? 1 : 0, 
-                      scale: (animationStage === 'done' && activeIndex === index) ? 1 : 0.8,
+                      opacity: (isSlideshow && activeIndex === index) ? 1 : 0, 
+                      scale: (isSlideshow && activeIndex === index) ? 1 : 0.8,
                       rotate: 45
                     }}
                   />
@@ -265,12 +345,13 @@ export const BuiltTwice: React.FC = () => {
 
           <div className={styles.avatarsLayout}>
             {avatarData.map((data, index) => {
-              const isActive = index === activeIndex && animationStage === 'done';
+              const isSlideshowActive = isSlideshow && index === activeIndex;
+              const isActive = isAvatarsIn || isSlideshowActive; 
               const IconComponent = data.Component;
               
-              const currentHeight = animationStage === 'hidden' ? 0 : (animationStage === 'entering' ? 200 : (isActive ? 240 : 190));
-              const currentOpacity = animationStage === 'hidden' ? 0 : (animationStage === 'entering' ? 1 : (isActive ? 1 : 0.5));
-              const currentFilter = animationStage === 'done' && !isActive ? 'grayscale(100%) opacity(60%)' : 'grayscale(0%) opacity(100%)';
+              const currentScale = isHidden ? 0 : (isActive ? 1.05 : 0.8);
+              const currentOpacity = isHidden ? 0 : (isActive ? 1 : 0.5);
+              const currentFilter = isHidden ? 'grayscale(100%) opacity(0%)' : (isActive ? 'grayscale(0%) opacity(100%)' : 'grayscale(100%) opacity(60%)');
               
               return (
                 <div 
@@ -279,27 +360,25 @@ export const BuiltTwice: React.FC = () => {
                   onClick={() => handleAvatarClick(index)}
                 >
                   <motion.div
-                    className={styles.avatarSvg}
-                    initial={{ height: 0, opacity: 0 }}
+                    initial={{ scale: 0, opacity: 0 }}
                     animate={{ 
-                      height: currentHeight,
+                      scale: currentScale,
                       opacity: currentOpacity,
                       filter: currentFilter
                     }}
                     transition={{ 
-                      height: { duration: 0.4, delay: animationStage === 'entering' ? index * 0.2 : 0, type: "spring", bounce: 0.3 },
-                      opacity: { duration: 0.4, delay: animationStage === 'entering' ? index * 0.2 : 0 }
+                      scale: { duration: 0.6, delay: isHidden ? 0 : index * 0.15, type: "spring", bounce: 0.5 },
+                      opacity: { duration: 0.4, delay: isHidden ? 0 : index * 0.15 }
                     }}
-                    style={{ width: 'auto', display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}
+                    style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', transformOrigin: 'center center' }}
                   >
-                    <IconComponent style={{ width: 'auto', height: '100%' }} />
+                    <div className={styles.avatarSvg}>
+                      <IconComponent className={isActive ? 'active-avatar' : ''} style={{ width: 'auto', height: isMobile ? '100px' : '200px' }} />
+                    </div>
+                    <h3 className={styles.avatarTitle}>
+                      {data.id.charAt(0).toUpperCase() + data.id.slice(1)}
+                    </h3>
                   </motion.div>
-                  <motion.h3 
-                    className={styles.avatarTitle} 
-                    animate={{ opacity: currentOpacity }}
-                  >
-                    {data.id.charAt(0).toUpperCase() + data.id.slice(1)}
-                  </motion.h3>
                 </div>
               );
             })}

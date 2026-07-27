@@ -17,7 +17,7 @@
   justify-content: flex-start;
   align-items: center;
   overflow: hidden;
-  padding: 10vh 20px 0;
+  padding: 12vh 20px 0;
   box-sizing: border-box;
 }
 
@@ -26,14 +26,14 @@
   flex-direction: column;
   align-items: center;
   z-index: 10;
-  margin-top: 48px;
+  margin-top: 36px;
 }
 
 .headingWrapper {
   position: relative;
   font-family: var(--font-heading);
   font-size: 72px;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: -2.6px;
   color: var(--text-h);
   text-align: center;
@@ -82,7 +82,8 @@
   justify-content: center;
   width: 255px; /* From SVG */
   height: 109px;
-  margin-top: -10px; /* Optical alignment */
+  margin-top: 4px; /* Optical alignment */
+  margin-left: -12px; /* Pull closer to the text */
 }
 
 @media (max-width: 1024px) {
@@ -142,7 +143,7 @@
 /* Avatar Section */
 .avatarsSection {
   position: absolute;
-  bottom: 8vh;
+  bottom: 10vh;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -165,7 +166,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: center;
   cursor: pointer;
   flex: 1;
 }
@@ -175,7 +176,7 @@
   transition: filter 0.4s ease;
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
 }
 
 @media (max-width: 1024px) {
@@ -205,7 +206,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 24px;
+  margin-bottom: 32px;
 }
 
 .sharedBubble {
@@ -213,7 +214,7 @@
   border: 2px solid #1A1A1A;
   border-radius: 24px;
   padding: 24px 32px;
-  font-size: 20px;
+  font-size: 24px;
   line-height: 1.4;
   width: 100%;
   max-width: 740px;
@@ -244,7 +245,7 @@
   justify-content: space-between;
   padding: 0 40px;
   box-sizing: border-box;
-  margin-top: -12px; /* Overlap border */
+  margin-top: -9px; /* Overlap border */
   z-index: 3;
 }
 

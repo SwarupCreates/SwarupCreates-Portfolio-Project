@@ -9,6 +9,35 @@ const RefineAvatar = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     {...props}
   >
+    <style>
+      {`
+        .active-avatar .star-left-1 { animation: starCollapseLeft 4s infinite ease-in-out; transform-box: fill-box; transform-origin: center center; }
+        .active-avatar .star-left-2 { animation: starCollapseLeft 5s infinite ease-in-out 1.2s; transform-box: fill-box; transform-origin: center center; }
+        .active-avatar .star-left-3 { animation: starCollapseLeft 4.5s infinite ease-in-out 0.5s; transform-box: fill-box; transform-origin: center center; }
+        .active-avatar .star-right-1 { animation: starCollapseRight 5.5s infinite ease-in-out 0.8s; transform-box: fill-box; transform-origin: center center; }
+        .active-avatar .star-right-2 { animation: starCollapseRight 4.8s infinite ease-in-out 0.3s; transform-box: fill-box; transform-origin: center center; }
+
+        @keyframes starCollapseLeft {
+          0%, 40% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 1; }
+          10%, 30% { transform: scale(1.15) translate(0, 0) rotate(5deg); opacity: 1; }
+          20% { transform: scale(0.9) translate(0, 0) rotate(-5deg); opacity: 1; }
+          50% { transform: scale(1.2) translate(0, 0) rotate(15deg); opacity: 1; }
+          65% { transform: scale(0) translate(30px, 30px) rotate(90deg); opacity: 0; }
+          90% { transform: scale(0) translate(30px, 30px) rotate(90deg); opacity: 0; }
+          100% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 1; }
+        }
+
+        @keyframes starCollapseRight {
+          0%, 40% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 1; }
+          10%, 30% { transform: scale(1.15) translate(0, 0) rotate(-5deg); opacity: 1; }
+          20% { transform: scale(0.9) translate(0, 0) rotate(5deg); opacity: 1; }
+          50% { transform: scale(1.2) translate(0, 0) rotate(-15deg); opacity: 1; }
+          65% { transform: scale(0) translate(-30px, 30px) rotate(-90deg); opacity: 0; }
+          90% { transform: scale(0) translate(-30px, 30px) rotate(-90deg); opacity: 0; }
+          100% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 1; }
+        }
+      `}
+    </style>
     <g id="Refine">
       <g id="Group 38496">
         <g id="Group 2771">
@@ -224,6 +253,7 @@ const RefineAvatar = (props: SVGProps<SVGSVGElement>) => (
         </g>
         <path
           id="Vector 3714"
+          className="star-left-1"
           d="M19.601 162.596C21.3448 154.652 20.531 136.206 3.3252 125.975C19.601 130.626 31.2265 128.301 36.4581 116.094C36.4581 132.37 41.457 139.926 54.4777 149.227C36.3418 145.506 23.6699 156.589 19.601 162.596Z"
           fill="#FFD95B"
           stroke="#1A1A1A"
@@ -233,6 +263,7 @@ const RefineAvatar = (props: SVGProps<SVGSVGElement>) => (
         />
         <path
           id="Vector 3715"
+          className="star-right-1"
           d="M234.093 153.294C232.35 145.35 233.163 126.904 250.369 116.674C234.093 121.324 222.468 118.999 217.236 106.792C217.236 123.068 212.237 130.624 199.217 139.925C217.353 136.205 230.024 147.288 234.093 153.294Z"
           fill="#FFD95B"
           stroke="#1A1A1A"
@@ -242,6 +273,7 @@ const RefineAvatar = (props: SVGProps<SVGSVGElement>) => (
         />
         <path
           id="Vector 3716"
+          className="star-right-2"
           d="M238.891 75.6339C234.827 71.5567 228.293 60.239 234.667 47.5856C226.724 56.5549 218.901 59.5917 211.133 54.298C217.328 64.0109 217.22 70.423 212.989 80.9286C222.397 71.8064 234.177 73.5979 238.891 75.6339Z"
           fill="#FFD95B"
           stroke="#1A1A1A"
@@ -251,6 +283,7 @@ const RefineAvatar = (props: SVGProps<SVGSVGElement>) => (
         />
         <path
           id="Vector 3717"
+          className="star-left-2"
           d="M26.0397 87.0327C28.5614 84.5028 32.616 77.4802 28.6606 69.6289C33.5893 75.1943 38.4433 77.0786 43.2631 73.7939C39.4196 79.8207 39.4862 83.7994 42.1114 90.3181C36.2743 84.6578 28.9648 85.7694 26.0397 87.0327Z"
           fill="#FFD95B"
           stroke="#1A1A1A"
@@ -260,6 +293,7 @@ const RefineAvatar = (props: SVGProps<SVGSVGElement>) => (
         />
         <path
           id="Vector 3718"
+          className="star-left-3"
           d="M24.8364 43.981C28.7295 40.0753 34.9892 29.2334 28.8827 17.1121C36.4919 25.7042 43.9857 28.6134 51.4267 23.5422C45.493 32.8468 45.5959 38.9892 49.6488 49.0531C40.6372 40.3145 29.3524 42.0306 24.8364 43.981Z"
           fill="#FFD95B"
           stroke="#1A1A1A"

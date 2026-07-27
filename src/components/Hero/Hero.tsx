@@ -1,17 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import { Button } from '../Button';
 import { ProgressNavigation } from '../ProgressNavigation/ProgressNavigation';
 import { ScrollIndicator } from '../ScrollIndicator/ScrollIndicator';
 import { SwarupCreatesLogo } from '../../assets/icons/SwarupCreatesLogo';
 import Antigravity from '../backgrounds/Antigravity/Antigravity';
-import GradualBlur from '../gradualBlur/GradualBlur';
 import styles from './Hero.module.css';
 
 export const Hero: React.FC = () => {
   const { scrollY, scrollYProgress } = useScroll();
   const topGradOpacity = useTransform(scrollY, [0, 50], [0, 1]);
   const bottomGradOpacity = useTransform(scrollYProgress, [0.95, 1], [1, 0]);
+
+  const [vh, setVh] = useState(1000);
+  React.useEffect(() => {
+    setVh(window.innerHeight);
+    const handleResize = () => setVh(window.innerHeight);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Crossfade between 65% and 75% of the viewport height using global scrollY
+  const oldHeaderOpacity = useTransform(scrollY, [vh * 0.65, vh * 0.75], [1, 0]);
+  const newHeaderOpacity = useTransform(scrollY, [vh * 0.75, vh * 0.85], [0, 1]);
+  const newHeaderY = useTransform(scrollY, [vh * 0.75, vh * 0.85], [15, 0]);
 
   const [isHovered, setIsHovered] = useState(false);
   const mouseX = useMotionValue(0);
@@ -55,9 +67,47 @@ export const Hero: React.FC = () => {
         {/* Top Header */}
         <header className={styles.header}>
           <motion.div className={styles.headerGradient} style={{ opacity: topGradOpacity }}>
-            <GradualBlur target="parent" position="top" height="150px" strength={4} divCount={8} curve="bezier" exponential opacity={1} />
           </motion.div>
-          <span className={styles.tagline}>Building with purpose.</span>
+          
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '48px' }}>
+            <motion.span 
+              className={styles.tagline}
+              style={{ 
+                opacity: oldHeaderOpacity,
+                position: 'absolute',
+                left: 0,
+                whiteSpace: 'nowrap',
+                pointerEvents: 'none'
+              }}
+            >
+              Building with purpose.
+            </motion.span>
+
+            <motion.div
+              style={{ 
+                opacity: newHeaderOpacity, 
+                y: newHeaderY,
+                display: 'flex',
+                alignItems: 'center',
+                gap: '8px',
+                position: 'absolute',
+                left: 0,
+                whiteSpace: 'nowrap'
+              }}
+            >
+              <SwarupCreatesLogo 
+                width="42"
+                height="42"
+                style={{ width: '42px', height: '42px', minWidth: '48px', flexShrink: 0 }} 
+                isContracted={true} 
+                color="#005ec9" 
+              />
+              <span style={{ fontSize: '24px', color: '#1a1a1a', letterSpacing: '-0.5px', fontFamily: '"Stack Sans Notch", sans-serif' }}>
+                Swarup<span style={{ fontWeight: 700 }}>Creates</span>
+              </span>
+            </motion.div>
+          </div>
+
           <ProgressNavigation />
         </header>
 
@@ -119,7 +169,6 @@ export const Hero: React.FC = () => {
 
       {/* Blur Transition */}
       <motion.div className={styles.blurTransition} style={{ opacity: bottomGradOpacity }}>
-        <GradualBlur target="parent" position="bottom" height="12vh" strength={4} divCount={8} curve="bezier" exponential opacity={1} />
       </motion.div>
 
       {/* Photo Tooltip */}

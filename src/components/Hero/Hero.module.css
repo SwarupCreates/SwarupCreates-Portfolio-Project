@@ -35,7 +35,8 @@
   transform: translate(-50%, -50%);
   width: 140%;
   height: 140%;
-  background: radial-gradient(circle at center, rgba(245, 245, 245, 1) 60%, rgba(245, 245, 245, 0) 100%);
+  background: radial-gradient(circle at center, rgba(245, 245, 245, 1) 40%, rgba(245, 245, 245, 1) 60%, rgba(245, 245, 245, 0) 70%);
+  /* background: radial-gradient(circle at center, rgba(245, 245, 245, 1) 40%, rgb(255, 129, 129) 70%); */
   z-index: -1; /* Place it strictly behind the SVG logo within the container */
   pointer-events: none;
 }
