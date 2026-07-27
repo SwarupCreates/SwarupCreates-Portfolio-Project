@@ -10,7 +10,7 @@ import { AnimationProvider } from './context/AnimationContext';
 const App: React.FC = () => {
   return (
     <AnimationProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
       <CustomCursor />
       <DevTools />
       <ThemeToggle />
