@@ -35,7 +35,7 @@ export const DevTools: React.FC = () => {
     if (navigator.clipboard && navigator.clipboard.writeText) {
       navigator.clipboard.writeText(json).then(() => {
         alert('Config copied to clipboard! (also logged to console)');
-      }).catch(err => {
+      }).catch(() => {
         fallbackCopyTextToClipboard(json);
       });
     } else {
@@ -55,7 +55,7 @@ export const DevTools: React.FC = () => {
     try {
       document.execCommand('copy');
       alert('Config copied to clipboard! (also logged to console)');
-    } catch (err) {
+    } catch {
       alert('Failed to copy. The JSON config has been printed to your browser console!');
     }
     document.body.removeChild(textArea);

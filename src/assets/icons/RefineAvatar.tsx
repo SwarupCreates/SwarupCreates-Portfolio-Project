@@ -1,5 +1,4 @@
-import * as React from "react"
-import { SVGProps } from "react"
+import type {  SVGProps  } from "react"
 const RefineAvatar = (props: SVGProps<SVGSVGElement>) => (
   <svg
     width={254}

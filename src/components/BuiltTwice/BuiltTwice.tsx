@@ -154,7 +154,7 @@ export const BuiltTwice: React.FC = () => {
   const viewBox = isMobile ? "0 0 427 281" : "0 0 1692 365";
   const currentPath = isMobile ? mobilePathD : desktopPathD;
 
-  const pathRef = useRef<SVGPathElement>(null);
+  const pathRef = useRef<SVGPathElement>(null!);
   const planeInView = useInView(containerRef, { once: false, margin: "100px 0px 0px 0px" });
 
   const flightPathState = getActiveState('flightPath', planeInView);
@@ -193,7 +193,7 @@ export const BuiltTwice: React.FC = () => {
             <path
               ref={pathRef}
               d={currentPath}
-              stroke="#1A1A1A"
+              stroke="var(--text-primary)"
               strokeOpacity="0.48"
               strokeWidth="2"
               strokeLinecap="round"

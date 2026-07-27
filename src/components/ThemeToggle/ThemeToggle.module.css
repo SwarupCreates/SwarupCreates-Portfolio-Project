@@ -1,0 +1,32 @@
+.themeToggle {
+  position: fixed;
+  bottom: 32px;
+  left: 32px;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 9999;
+  transition: all var(--transition-normal);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft);
+}
+
+.themeToggle:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-large);
+  background: var(--surface-hover);
+}
+
+.themeToggle:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  font-size: 24px;
+}

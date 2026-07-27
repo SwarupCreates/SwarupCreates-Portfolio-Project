@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import { Button } from '../Button';
 import { ProgressNavigation } from '../ProgressNavigation/ProgressNavigation';
@@ -102,7 +102,7 @@ export const Hero: React.FC = () => {
                 isContracted={true} 
                 color="#005ec9" 
               />
-              <span style={{ fontSize: '24px', color: '#1a1a1a', letterSpacing: '-0.5px', fontFamily: '"Stack Sans Notch", sans-serif' }}>
+              <span style={{ fontSize: '24px', color: 'var(--text-primary)', letterSpacing: '-0.5px', fontFamily: '"Stack Sans Notch", sans-serif' }}>
                 Swarup<span style={{ fontWeight: 700 }}>Creates</span>
               </span>
             </motion.div>

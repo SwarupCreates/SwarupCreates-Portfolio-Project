@@ -3,8 +3,11 @@
   --primary: #005AC2;
   --primary-light: #89CAFF;
   --primary-transparent: #005AC232;
-  --text-primary: #1A1A1A;
-  --text-secondary: rgba(26, 26, 26, 0.6);
+  --text-primary: #333333;
+  --text-secondary: rgba(51, 51, 51, 0.6);
+  --logo-stroke-end: rgba(51, 51, 51, 0.10);
+  --bg-rgb: 245, 245, 245;
+  --text-rgb: 51, 51, 51;
   
   /* Cursor Variables */
   --cursor-arrow-stroke: #000000;
@@ -51,9 +54,23 @@
   --transition-slow: 500ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Dark theme is disabled until colors are defined */
+/* Dark theme overrides */
 [data-theme='dark'] {
+  --primary: #4a9cf7;
+  --primary-light: #89CAFF;
+  --primary-transparent: rgba(74, 156, 247, 0.2);
+  --text-primary: #F5F5F5;
+  --text-secondary: rgba(255, 255, 255, 0.6);
+  --logo-stroke-end: rgba(255, 255, 255, 0.15);
+  --bg-rgb: 0, 0, 0;
+  --text-rgb: 245, 245, 245;
+
+  --surface: #111111;
+  --surface-hover: rgba(137, 202, 255, 0.1);
+  --background: #000000;
+  --border: rgba(255, 255, 255, 0.12);
+
   --cursor-arrow-stroke: var(--primary-light);
   --cursor-arrow-fill: var(--primary);
-  --cursor-text-stroke: #FFFFFF;
+  --cursor-text-stroke: #000000;
 }

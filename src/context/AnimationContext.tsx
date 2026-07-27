@@ -1,4 +1,5 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState } from 'react';
+import type { ReactNode } from 'react';
 
 export type ElementState = {
   x: number;
@@ -20,8 +21,6 @@ export type GlobalAnimationConfig = {
   twiceCard: AnimationConfig;
   flightPath: AnimationConfig;
 };
-
-const defaultElementState: ElementState = { x: 0, y: 0, rotate: 0, scale: 0, speed: 50 }; // speed 50 as default middle
 
 const initialConfig: GlobalAnimationConfig = {
   "plane": {

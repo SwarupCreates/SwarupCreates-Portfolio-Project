@@ -35,7 +35,7 @@ export const SwarupCreatesLogo = ({
         animating: {
           pathLength: 0.2,
           pathSpacing: 0,
-          stroke: [color, "rgba(26, 26, 26, 0.10)"],
+          stroke: [color, "var(--logo-stroke-end)"],
           "--stroke-mult": 1,
           transition: {
             duration: animationSpeed,
