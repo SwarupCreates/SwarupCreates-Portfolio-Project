@@ -14,8 +14,8 @@
   flex-direction: column;
   height: 100%;
   width: 100%;
-  padding: 36px;
-  max-width: 1200px;
+  padding: 2.25rem;
+  max-width: 75rem;
   margin: 0 auto;
   position: relative;
   z-index: 1;
@@ -24,7 +24,7 @@
 
 @media (min-width: 768px) {
   .container {
-    padding: 48px;
+    padding: 3rem;
   }
 }
 
@@ -68,7 +68,7 @@
 
 @media (min-width: 768px) {
   .bgLogo path {
-    stroke-width: calc(4px * var(--stroke-mult, 1)) !important;
+    stroke-width: calc(0.25rem * var(--stroke-mult, 1)) !important;
   }
 }
 
@@ -77,7 +77,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  padding: 40px 48px;
+  padding: 2.5rem 3rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
@@ -91,7 +91,7 @@
   top: 0;
   left: 0;
   width: 100%;
-  height: 150px; /* High enough to cover header and progressive fade out */
+  height: 9.375rem; /* High enough to cover header and progressive fade out */
   z-index: -1;
   background: linear-gradient(to bottom, rgba(var(--bg-rgb), 0.95) 20%, rgba(var(--bg-rgb), 0) 100%);
   pointer-events: none;
@@ -120,15 +120,15 @@
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 600px;
+  max-width: 37.5rem;
 }
 
 .headline {
   font-family: var(--font-heading);
-  font-size: 54px;
+  font-size: 3.375rem;
   font-weight: 300; /* Light variant */
   letter-spacing: -0.02em;
-  margin-bottom: 18px; /* 18px gap */
+  margin-bottom: 1.125rem; /* 1.125rem gap */
 }
 
 .highlight {
@@ -138,10 +138,10 @@
 
 .subtitle {
   font-family: var(--font-body);
-  font-size: 24px;
+  font-size: 1.5rem;
   color: var(--text-primary);
   font-weight: 500; /* Medium variant */
-  margin-bottom: 48px; /* generous whitespace before buttons */
+  margin-bottom: 3rem; /* generous whitespace before buttons */
   line-height: 1.5;
 }
 
@@ -149,14 +149,14 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 8px; /* Gap between buttons is 8px */
+  gap: 0.5rem; /* Gap between buttons is 0.5rem */
 }
 
 @media (min-width: 768px) {
   .buttonGroup {
     flex-direction: row;
     justify-content: center;
-    gap: 8px; /* Gap between buttons is 8px */
+    gap: 0.5rem; /* Gap between buttons is 0.5rem */
   }
 }
 
@@ -166,20 +166,20 @@
 @media (min-width: 768px) {
   .fullWidthButton {
     width: auto;
-    min-width: 200px;
+    min-width: 12.5rem;
   }
 }
 
 .bottomSection {
   position: absolute;
-  bottom: 64px;
+  bottom: 4rem;
   left: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   z-index: 50;
-  gap: 36px; /* Gap between button cluster and scroll indicator */
+  gap: 2.25rem; /* Gap between button cluster and scroll indicator */
   pointer-events: none;
 }
 
@@ -209,7 +209,7 @@
 .tooltipText {
   font-family: "Solitreo";
   font-weight: 400;
-  font-size: 24px;
+  font-size: 1.5rem;
   color: var(--text-primary);
   white-space: nowrap;
   margin-bottom: 2px;
@@ -217,10 +217,10 @@
 }
 
 .photoTooltip {
-  width: 140px;
-  height: 160px;
+  width: 8.75rem;
+  height: 10rem;
   object-fit: cover;
   border: 2px solid var(--text-primary);
-  border-radius: 24px 24px 24px 8px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 1.5rem 1.5rem 1.5rem 0.5rem;
+  box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15);
 }

@@ -69,7 +69,7 @@ export const Hero: React.FC = () => {
           <motion.div className={styles.headerGradient} style={{ opacity: topGradOpacity }}>
           </motion.div>
           
-          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '48px' }}>
+          <div style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '3rem' }}>
             <motion.span 
               className={styles.tagline}
               style={{ 
@@ -89,7 +89,7 @@ export const Hero: React.FC = () => {
                 y: newHeaderY,
                 display: 'flex',
                 alignItems: 'center',
-                gap: '8px',
+                gap: '0.5rem',
                 position: 'absolute',
                 left: 0,
                 whiteSpace: 'nowrap'
@@ -98,11 +98,11 @@ export const Hero: React.FC = () => {
               <SwarupCreatesLogo 
                 width="42"
                 height="42"
-                style={{ width: '42px', height: '42px', minWidth: '48px', flexShrink: 0 }} 
+                style={{ width: '2.625rem', height: '2.625rem', minWidth: '3rem', flexShrink: 0 }} 
                 isContracted={true} 
                 color="#005ec9" 
               />
-              <span style={{ fontSize: '24px', color: 'var(--text-primary)', letterSpacing: '-0.5px', fontFamily: '"Stack Sans Notch", sans-serif' }}>
+              <span style={{ fontSize: '1.5rem', color: 'var(--text-primary)', letterSpacing: '-0.03125rem', fontFamily: '"Stack Sans Notch", sans-serif' }}>
                 Swarup<span style={{ fontWeight: 700 }}>Creates</span>
               </span>
             </motion.div>
@@ -151,14 +151,14 @@ export const Hero: React.FC = () => {
         >
           <Button 
             icon="download" 
-            style={{ borderRadius: '32px 12px 12px 32px', width: 'fit-content', whiteSpace: 'nowrap' }}
+            style={{ borderRadius: '2rem 0.75rem 0.75rem 2rem', width: 'fit-content', whiteSpace: 'nowrap' }}
           >
             Download Resume
           </Button>
           <Button 
             variant="secondary" 
             icon="mail" 
-            style={{ borderRadius: '12px 32px 32px 12px', width: 'fit-content', whiteSpace: 'nowrap' }}
+            style={{ borderRadius: '0.75rem 2rem 2rem 0.75rem', width: 'fit-content', whiteSpace: 'nowrap' }}
           >
             Get in touch with me
           </Button>

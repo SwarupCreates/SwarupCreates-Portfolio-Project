@@ -9,7 +9,7 @@ export const ScrollIndicator: React.FC = () => {
       animate={{ y: [0, 8, 0] }}
       transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
     >
-      <span className="material-symbols-outlined" style={{ fontSize: '20px' }}>mouse</span>
+      <span className="material-symbols-outlined" style={{ fontSize: '1.25rem' }}>mouse</span>
       <span className={styles.text}>Scroll Down</span>
     </motion.div>
   );

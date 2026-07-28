@@ -82,13 +82,9 @@ export const BuiltTwice: React.FC = () => {
   };
 
   const [isMobile, setIsMobile] = useState(false);
-  const [pathScale, setPathScale] = useState(1);
   useEffect(() => {
     const handleResize = () => {
-      const mobile = window.innerWidth <= 1024;
-      setIsMobile(mobile);
-      const idealWidth = mobile ? 427 : 1692;
-      setPathScale((window.innerWidth / idealWidth) * 0.90); // Scale down slightly so it doesn't touch edges
+      setIsMobile(window.innerWidth <= 1024);
     };
     handleResize();
     window.addEventListener('resize', handleResize);
@@ -171,9 +167,9 @@ export const BuiltTwice: React.FC = () => {
         <div 
           className={styles.pathContainer}
           style={{ 
-            transform: `translate(calc(-46% + ${flightPathState.x}px), calc(-50% + ${flightPathState.y}px)) scale(${pathScale * mapScale(flightPathState.scale)}) rotate(${flightPathState.rotate}deg)`,
-            width: isMobile ? '427px' : '1692px',
-            height: isMobile ? '281px' : '365px',
+            transform: `translate(calc(-46% + ${flightPathState.x}px), calc(-50% + ${flightPathState.y}px)) scale(${1 * mapScale(flightPathState.scale)}) rotate(${flightPathState.rotate}deg)`,
+            width: isMobile ? '26.6875rem' : '105.75rem',
+            height: isMobile ? '17.5625rem' : '22.8125rem',
             transition: isScrubbing ? 'none' : 'transform 1s ease'
           }}
         >
@@ -228,7 +224,7 @@ export const BuiltTwice: React.FC = () => {
                 flexWrap: 'wrap',
                 justifyContent: 'center',
                 alignItems: 'center',
-                gap: isMobile ? '8px' : '16px',
+                gap: isMobile ? '0.5rem' : '1rem',
               }}
             >
               <span>Great</span>
@@ -373,7 +369,7 @@ export const BuiltTwice: React.FC = () => {
                     style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', transformOrigin: 'center center' }}
                   >
                     <div className={styles.avatarSvg}>
-                      <IconComponent className={isActive ? 'active-avatar' : ''} style={{ width: 'auto', height: isMobile ? '100px' : '200px' }} />
+                      <IconComponent className={isActive ? 'active-avatar' : ''} style={{ width: 'auto', height: isMobile ? '6.25rem' : '12.5rem' }} />
                     </div>
                     <h3 className={styles.avatarTitle}>
                       {data.id.charAt(0).toUpperCase() + data.id.slice(1)}

@@ -17,8 +17,8 @@ export const PaperPlaneAnimation: React.FC<PaperPlaneAnimationProps> = ({
   duration = 4000,
   autoPlay = false,
   children,
-  width = '86px',
-  height = '60px',
+  width = '5.375rem',
+  height = '3.75rem',
   progressOverride
 }) => {
   const planeRef = useRef<HTMLDivElement>(null);
@@ -209,7 +209,7 @@ export const PaperPlaneAnimation: React.FC<PaperPlaneAnimationProps> = ({
             >
               <span className={styles.connectText}>Wanna connect?</span>
               <a href="mailto:srpcreates@gmail.com" className={styles.connectBtn}>
-                <span className="material-symbols-outlined" style={{ fontSize: '24px' }}>forward_to_inbox</span>
+                <span className="material-symbols-outlined" style={{ fontSize: '1.5rem' }}>forward_to_inbox</span>
                 Drop an email
               </a>
             </motion.div>

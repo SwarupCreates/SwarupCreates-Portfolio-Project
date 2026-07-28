@@ -1,7 +1,7 @@
 .devToolsContainer {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
+  bottom: 1.5rem;
+  right: 1.5rem;
   z-index: 9990;
 }
 
@@ -9,17 +9,17 @@
   background-color: var(--text-primary);
   color: #fff;
   border: none;
-  border-radius: 20px;
-  padding: 8px 16px;
+  border-radius: 1.25rem;
+  padding: 0.5rem 1rem;
   font-family: inherit;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 0.875rem;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease, background-color 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 0.5rem;
 }
 
 .devToolsBtn:hover {
@@ -42,14 +42,14 @@
 
 .modalContent {
   background-color: #fff;
-  border-radius: 16px;
-  padding: 24px;
+  border-radius: 1rem;
+  padding: 1.5rem;
   width: 90%;
-  max-width: 400px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  max-width: 25rem;
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .modalHeader {
@@ -57,12 +57,12 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #eaeaea;
-  padding-bottom: 12px;
+  padding-bottom: 0.75rem;
 }
 
 .modalHeader h3 {
   margin: 0;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -70,10 +70,10 @@
 .closeBtn {
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 1.25rem;
   cursor: pointer;
   color: #666;
-  padding: 4px;
+  padding: 0.25rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -89,26 +89,26 @@
 .modalBody {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-height: 100px;
+  gap: 1rem;
+  min-height: 6.25rem;
 }
 
 .controlsWrapper {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 1rem;
 }
 
 .controlRow {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 0.25rem;
 }
 
 .controlHeader {
   display: flex;
   justify-content: space-between;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 600;
   color: #333;
 }
@@ -123,25 +123,25 @@ input[type="range"] {
 }
 
 .selectInput {
-  padding: 8px;
-  border-radius: 8px;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   border: 1px solid #ccc;
   font-family: inherit;
-  font-size: 14px;
+  font-size: 0.875rem;
   width: 100%;
 }
 
 .stateToggle {
   display: flex;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 0.5rem;
   overflow: hidden;
-  margin-bottom: 8px;
+  margin-bottom: 0.5rem;
 }
 
 .stateBtn {
   flex: 1;
-  padding: 8px;
+  padding: 0.5rem;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -156,12 +156,12 @@ input[type="range"] {
 }
 
 .finaliseBtn {
-  margin-top: 16px;
+  margin-top: 1rem;
   background: #2a8dff;
   color: #fff;
   border: none;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 0.625rem;
+  border-radius: 0.5rem;
   font-weight: 600;
   cursor: pointer;
   transition: opacity 0.2s;

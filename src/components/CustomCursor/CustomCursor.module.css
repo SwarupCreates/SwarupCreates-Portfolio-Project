@@ -9,6 +9,6 @@
 
 .iconContainer {
   position: absolute;
-  top: -8px; /* Offset to center the tip roughly at the cursor coordinates */
-  left: -8px;
+  top: -0.5rem; /* Offset to center the tip roughly at the cursor coordinates */
+  left: -0.5rem;
 }
