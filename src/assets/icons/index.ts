@@ -13,3 +13,4 @@ export { ReactComponent as ThoughtTextCard } from "./ThoughtTextCard";
 export { ReactComponent as TwiceTextCard } from "./TwiceTextCard";
 export { ReactComponent as LanternComponent } from "./LanternComponent";
 export { customPointerClickIcon } from "./customPointerClickIcon";
+export { ReactComponent as AwkwardAvatar } from "./awkwardAvatar";

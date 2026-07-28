@@ -160,7 +160,7 @@ export const BuiltTwice: React.FC = () => {
   const twiceState = getActiveState('twiceCard', isHoveringText);
 
   return (
-    <div className={styles.container} ref={containerRef} key={replayKey}>
+    <section className={styles.container} ref={containerRef} key={replayKey}>
       <div className={styles.stickySection}>
         
         {/* Background Path & Plane */}
@@ -381,6 +381,6 @@ export const BuiltTwice: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };

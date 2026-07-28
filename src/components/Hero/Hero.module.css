@@ -68,7 +68,7 @@
 
 @media (min-width: 768px) {
   .bgLogo path {
-    stroke-width: calc(0.25rem * var(--stroke-mult, 1)) !important;
+    stroke-width: calc(0.15rem * var(--stroke-mult, 1)) !important;
   }
 }
 

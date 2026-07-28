@@ -1,19 +1,59 @@
-import React, { useState } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import styles from './ProgressNavigation.module.css';
 
 export const ProgressNavigation: React.FC = () => {
-  const { scrollYProgress } = useScroll();
+  const [sections, setSections] = useState<HTMLElement[]>([]);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  useMotionValueEvent(scrollYProgress, "change", (latest) => {
-    if (latest < 0.3) setActiveIndex(0);
-    else setActiveIndex(1);
-  });
+  useEffect(() => {
+    const updateSections = () => {
+      const sectionElements = Array.from(document.querySelectorAll('section'));
+      setSections(sectionElements as HTMLElement[]);
+    };
+
+    updateSections();
+    const timer = setTimeout(updateSections, 500);
+
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight;
+      
+      const sectionElements = Array.from(document.querySelectorAll('section'));
+      if (sectionElements.length !== sections.length) {
+         setSections(sectionElements as HTMLElement[]);
+      }
+
+      let currentIndex = 0;
+      
+      // If at bottom of page, highlight last
+      if (scrollY + windowHeight >= docHeight - 50) {
+        setActiveIndex(sectionElements.length - 1);
+        return;
+      }
+
+      sectionElements.forEach((el, index) => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top <= windowHeight / 2) {
+          currentIndex = index;
+        }
+      });
+      setActiveIndex(currentIndex);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      clearTimeout(timer);
+    };
+  }, [sections.length]);
 
   return (
     <div className={styles.container}>
-      {[0, 1].map((index) => {
+      {sections.map((_, index) => {
         const isActive = index === activeIndex;
         return (
           <motion.div
