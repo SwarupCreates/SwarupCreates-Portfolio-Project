@@ -1,5 +1,4 @@
-import * as React from "react"
-import { SVGProps } from "react"
+import type { SVGProps } from "react"
 const customPointerClickIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
     viewBox="0 0 15 15"
@@ -12,8 +11,6 @@ const customPointerClickIcon = (props: SVGProps<SVGSVGElement>) => (
       fill="#E2E2E2"
       style={{
         fill: "#E2E2E2",
-        fill: "color(display-p3 0.8846 0.8846 0.8846)",
-        fillOpacity: 1,
       }}
     />
     <path

@@ -1,5 +1,4 @@
-import * as React from "react"
-import { SVGProps } from "react"
+import type { SVGProps } from "react"
 import { motion } from "framer-motion"
 
 interface LanternProps extends SVGProps<SVGSVGElement> {
