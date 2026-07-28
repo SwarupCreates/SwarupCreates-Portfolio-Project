@@ -223,4 +223,6 @@
   border: 2px solid var(--text-primary);
   border-radius: 1.5rem 1.5rem 1.5rem 0.5rem;
   box-shadow: 0 0.625rem 1.875rem rgba(0, 0, 0, 0.15);
+  margin-bottom: 16px;
+  margin-left: -8px;
 }

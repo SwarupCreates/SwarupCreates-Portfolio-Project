@@ -3,7 +3,7 @@ import { animate } from 'framer-motion';
 
 export const useAssistiveScroll = () => {
   const isScrollingRef = useRef(false);
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const scrollTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const lastScrollYRef = useRef(0);
   const isProgrammaticScroll = useRef(false);
   const scrollAnimationRef = useRef<any>(null);

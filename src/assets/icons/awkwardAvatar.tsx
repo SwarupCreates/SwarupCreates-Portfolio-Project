@@ -1,5 +1,4 @@
-import * as React from "react"
-import { SVGProps } from "react"
+import type { SVGProps } from "react"
 const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
   <svg
     viewBox="0 0 187 279"
@@ -12,7 +11,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       fill="#E0E0E0"
       style={{
         fill: "#E0E0E0",
-        fill: "color(display-p3 0.8792 0.8792 0.8792)",
         fillOpacity: 1,
       }}
     />
@@ -21,7 +19,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       fill="#A5A5A5"
       style={{
         fill: "#A5A5A5",
-        fill: "color(display-p3 0.6471 0.6471 0.6471)",
         fillOpacity: 1,
       }}
     />
@@ -30,7 +27,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       fill="#EDEDED"
       style={{
         fill: "#EDEDED",
-        fill: "color(display-p3 0.9294 0.9294 0.9294)",
         fillOpacity: 1,
       }}
     />
@@ -39,7 +35,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       fill="#EDEDED"
       style={{
         fill: "#EDEDED",
-        fill: "color(display-p3 0.9294 0.9294 0.9294)",
         fillOpacity: 1,
       }}
     />
@@ -68,7 +63,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       fill="#BCBCBC"
       style={{
         fill: "#BCBCBC",
-        fill: "color(display-p3 0.7373 0.7373 0.7373)",
         fillOpacity: 1,
       }}
     />
@@ -78,7 +72,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       stroke="black"
       style={{
         fill: "#8C8C8C",
-        fill: "color(display-p3 0.5481 0.5481 0.5481)",
         fillOpacity: 1,
         stroke: "black",
         strokeOpacity: 1,
@@ -90,7 +83,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       fill="#2D2D2D"
       style={{
         fill: "#2D2D2D",
-        fill: "color(display-p3 0.1765 0.1765 0.1765)",
         fillOpacity: 1,
       }}
     />
@@ -143,7 +135,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       fill="#BCBCBC"
       style={{
         fill: "#BCBCBC",
-        fill: "color(display-p3 0.7373 0.7373 0.7373)",
         fillOpacity: 1,
       }}
     />
@@ -252,7 +243,6 @@ const awkwardAvatar = (props: SVGProps<SVGSVGElement>) => (
       stroke="black"
       style={{
         fill: "#D9D9D9",
-        fill: "color(display-p3 0.8510 0.8510 0.8510)",
         fillOpacity: 1,
         stroke: "black",
         strokeOpacity: 1,

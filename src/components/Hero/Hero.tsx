@@ -7,25 +7,18 @@ import Antigravity from '../backgrounds/Antigravity/Antigravity';
 import styles from './Hero.module.css';
 
 export const Hero: React.FC = () => {
-  const { scrollY, scrollYProgress } = useScroll();
-  const topGradOpacity = useTransform(scrollY, [0, 50], [0, 1]);
+  const { scrollYProgress } = useScroll();
   const bottomGradOpacity = useTransform(scrollYProgress, [0.95, 1], [1, 0]);
 
-  const [vh, setVh] = useState(1000);
   const [hasFinePointer, setHasFinePointer] = useState(true);
 
   React.useEffect(() => {
-    setVh(window.innerHeight);
-    const handleResize = () => setVh(window.innerHeight);
-    window.addEventListener('resize', handleResize);
-
     const mediaQuery = window.matchMedia('(pointer: fine)');
     setHasFinePointer(mediaQuery.matches);
     const listener = (e: MediaQueryListEvent) => setHasFinePointer(e.matches);
     mediaQuery.addEventListener('change', listener);
 
     return () => {
-      window.removeEventListener('resize', handleResize);
       mediaQuery.removeEventListener('change', listener);
     };
   }, []);
