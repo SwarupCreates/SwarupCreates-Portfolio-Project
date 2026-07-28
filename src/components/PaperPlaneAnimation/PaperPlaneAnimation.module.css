@@ -5,13 +5,12 @@
   top: 0;
   left: 0;
   will-change: transform;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
   z-index: 5;
 }
 
 .landed {
-  pointer-events: auto;
-  cursor: pointer;
 }
 
 @keyframes floatyJiggle {
@@ -40,7 +39,7 @@
 .connectTooltip {
   position: absolute;
   top: 2.25rem;
-  left: 50%;
+  left: 0;
   width: max-content;
   pointer-events: auto;
   display: flex;
@@ -57,13 +56,13 @@
   content: '';
   position: absolute;
   top: -0.625rem;
-  left: 50%;
+  left: 2rem;
   width: 1rem;
   height: 1rem;
   background: var(--surface);
   border-top: 2px solid rgba(var(--text-rgb), 0.267);
   border-left: 2px solid rgba(var(--text-rgb), 0.267);
-  transform: translateX(-50%) rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .connectText {

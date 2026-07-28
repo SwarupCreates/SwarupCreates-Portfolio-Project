@@ -96,7 +96,7 @@ const initialConfig: GlobalAnimationConfig = {
       "speed": 50
     },
     "final": {
-      "x": 68,
+      "x": 136,
       "y": -122,
       "rotate": 0,
       "scale": 8,

@@ -11,3 +11,5 @@ export { ReactComponent as ShortPath } from "./ShortPath";
 export { ReactComponent as ThinkAvatar } from "./ThinkAvatar";
 export { ReactComponent as ThoughtTextCard } from "./ThoughtTextCard";
 export { ReactComponent as TwiceTextCard } from "./TwiceTextCard";
+export { ReactComponent as LanternComponent } from "./LanternComponent";
+export { customPointerClickIcon } from "./customPointerClickIcon";

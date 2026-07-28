@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion, useMotionValue } from 'framer-motion';
 import { customCursorIcon as CursorIcon } from '../../assets/icons/customCursorIcon';
 import { customPointerIcon as PointerIcon } from '../../assets/icons/customPointerIcon';
+import { customPointerClickIcon as PointerClickIcon } from '../../assets/icons/customPointerClickIcon';
 import { customTextIcon as TextIcon } from '../../assets/icons/customTextIcon';
 import styles from './CustomCursor.module.css';
 
@@ -14,9 +15,19 @@ const HAND_SIZE = 26;
 export const CustomCursor: React.FC = () => {
   const [cursorType, setCursorType] = useState<'default' | 'pointer' | 'text'>('default');
   const [isVisible, setIsVisible] = useState(false);
+  const [hasFinePointer, setHasFinePointer] = useState(true);
+  const [isClicked, setIsClicked] = useState(false);
   
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(pointer: fine)');
+    setHasFinePointer(mediaQuery.matches);
+    const listener = (e: MediaQueryListEvent) => setHasFinePointer(e.matches);
+    mediaQuery.addEventListener('change', listener);
+    return () => mediaQuery.removeEventListener('change', listener);
+  }, []);
 
   useEffect(() => {
     const moveCursor = (e: MouseEvent) => {
@@ -56,7 +67,12 @@ export const CustomCursor: React.FC = () => {
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
 
+    const handleMouseDown = () => setIsClicked(true);
+    const handleMouseUp = () => setIsClicked(false);
+
     window.addEventListener('mousemove', moveCursor);
+    window.addEventListener('pointerdown', handleMouseDown);
+    window.addEventListener('pointerup', handleMouseUp);
     document.addEventListener('mouseover', handleMouseOver);
     document.addEventListener('mouseenter', handleMouseEnter);
     document.addEventListener('mouseleave', handleMouseLeave);
@@ -66,6 +82,8 @@ export const CustomCursor: React.FC = () => {
 
     return () => {
       window.removeEventListener('mousemove', moveCursor);
+      window.removeEventListener('pointerdown', handleMouseDown);
+      window.removeEventListener('pointerup', handleMouseUp);
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseenter', handleMouseEnter);
       document.removeEventListener('mouseleave', handleMouseLeave);
@@ -73,6 +91,8 @@ export const CustomCursor: React.FC = () => {
   }, [cursorX, cursorY]);
 
   const scaleSpring = { type: "spring", damping: 15, stiffness: 300 } as const;
+
+  if (!hasFinePointer) return null;
 
   return (
     <motion.div
@@ -106,7 +126,11 @@ export const CustomCursor: React.FC = () => {
         className={styles.iconContainer}
         style={{ originX: 0.2, originY: 0.1, width: HAND_SIZE, height: HAND_SIZE }}
       >
-        <PointerIcon width="100%" height="100%" style={{ width: '100%', height: '100%' }} />
+        {isClicked ? (
+          <PointerClickIcon width="100%" height="100%" style={{ width: '100%', height: '100%' }} />
+        ) : (
+          <PointerIcon width="100%" height="100%" style={{ width: '100%', height: '100%' }} />
+        )}
       </motion.div>
       <motion.div
         initial={false}

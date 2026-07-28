@@ -71,12 +71,18 @@ export const PaperPlaneAnimation: React.FC<PaperPlaneAnimationProps> = ({
           angle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x) * (180 / Math.PI);
         }
 
+        const svgElement = pathRef.current.ownerSVGElement;
+        let scale = 1;
+        if (svgElement && svgElement.viewBox.baseVal.width > 0) {
+          scale = svgElement.clientWidth / svgElement.viewBox.baseVal.width;
+        }
+
         // SVG is intrinsically drawn facing left, so we rotate by 180 degrees
         angle += 180;
 
-        planeRef.current.style.transform = `translate(${point.x}px, ${point.y}px) translate(-50%, -50%) rotate(${angle}deg) scaleY(-1)`;
+        planeRef.current.style.transform = `translate(${point.x * scale}px, ${point.y * scale}px) translate(-50%, -50%) rotate(${angle}deg) scaleY(-1)`;
         if (unrotatedRef.current) {
-          unrotatedRef.current.style.transform = `translate(${point.x}px, ${point.y}px) translate(-50%, -50%)`;
+          unrotatedRef.current.style.transform = `translate(${point.x * scale}px, ${point.y * scale}px) translate(-50%, -50%)`;
         }
 
         const isCurrentlyLanded = progress >= 0.999;
@@ -115,12 +121,18 @@ export const PaperPlaneAnimation: React.FC<PaperPlaneAnimationProps> = ({
         const nextPoint = pathRef.current.getPointAtLength(Math.min(1, pathLength));
         let angle = Math.atan2(nextPoint.y - startPoint.y, nextPoint.x - startPoint.x) * (180 / Math.PI);
         
+        const svgElement = pathRef.current.ownerSVGElement;
+        let scale = 1;
+        if (svgElement && svgElement.viewBox.baseVal.width > 0) {
+          scale = svgElement.clientWidth / svgElement.viewBox.baseVal.width;
+        }
+
         // SVG is intrinsically drawn facing left, so we rotate by 180 degrees
         angle += 180;
 
-        planeRef.current.style.transform = `translate(${startPoint.x}px, ${startPoint.y}px) translate(-50%, -50%) rotate(${angle}deg) scaleY(-1)`;
+        planeRef.current.style.transform = `translate(${startPoint.x * scale}px, ${startPoint.y * scale}px) translate(-50%, -50%) rotate(${angle}deg) scaleY(-1)`;
         if (unrotatedRef.current) {
-          unrotatedRef.current.style.transform = `translate(${startPoint.x}px, ${startPoint.y}px) translate(-50%, -50%)`;
+          unrotatedRef.current.style.transform = `translate(${startPoint.x * scale}px, ${startPoint.y * scale}px) translate(-50%, -50%)`;
         }
       }
     }
@@ -170,7 +182,6 @@ export const PaperPlaneAnimation: React.FC<PaperPlaneAnimationProps> = ({
   }, [autoPlay, duration, progressOverride]); // Re-run when these toggle
 
   const handlePlaneClick = () => {
-    if (!isLanded) return;
     if (showConnect) {
       setShowConnect(false);
       setIsJiggling(true);

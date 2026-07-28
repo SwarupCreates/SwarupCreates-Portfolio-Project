@@ -13,11 +13,22 @@ export const Hero: React.FC = () => {
   const bottomGradOpacity = useTransform(scrollYProgress, [0.95, 1], [1, 0]);
 
   const [vh, setVh] = useState(1000);
+  const [hasFinePointer, setHasFinePointer] = useState(true);
+
   React.useEffect(() => {
     setVh(window.innerHeight);
     const handleResize = () => setVh(window.innerHeight);
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+
+    const mediaQuery = window.matchMedia('(pointer: fine)');
+    setHasFinePointer(mediaQuery.matches);
+    const listener = (e: MediaQueryListEvent) => setHasFinePointer(e.matches);
+    mediaQuery.addEventListener('change', listener);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      mediaQuery.removeEventListener('change', listener);
+    };
   }, []);
 
   // Crossfade between 65% and 75% of the viewport height using global scrollY
@@ -29,9 +40,33 @@ export const Hero: React.FC = () => {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
+  const [typeIdx, setTypeIdx] = useState(0);
+  const [showSubtitle, setShowSubtitle] = useState(false);
+
+  React.useEffect(() => {
+    let i = 0;
+    const fullLength = "Hello, I'm Swarup".length;
+    const typeNext = () => {
+      setTypeIdx(i);
+      i++;
+      if (i <= fullLength) {
+        setTimeout(typeNext, 60 + Math.random() * 40);
+      } else {
+        setTimeout(() => setShowSubtitle(true), 400);
+      }
+    };
+    setTimeout(typeNext, 800);
+  }, []);
+
+  const fullText = "Hello, I'm Swarup";
+  const currentText = fullText.slice(0, typeIdx);
+  const part1 = currentText.length > 11 ? "Hello, I'm " : currentText;
+  const part2 = currentText.length > 11 ? currentText.slice(11) : "";
+  const isTyping = typeIdx <= fullText.length;
+
   const handleMouseMove = (e: React.MouseEvent) => {
     mouseX.set(e.clientX + 4); 
-    mouseY.set(e.clientY - 12); // Raised by 8px from cursor
+    mouseY.set(e.clientY - 12);
   };
 
   return (
@@ -45,9 +80,9 @@ export const Hero: React.FC = () => {
           waveSpeed={1.4}
           waveAmplitude={1.1}
           particleSize={0.75}
-          lerpSpeed={0.05}
+          lerpSpeed={0.015}
           color="#005ec9"
-          autoAnimate={false}
+          autoAnimate={!hasFinePointer}
           particleVariance={1}
           rotationSpeed={0}
           depthFactor={1}
@@ -113,14 +148,9 @@ export const Hero: React.FC = () => {
 
         {/* Main Content Area */}
         <main className={styles.main}>
-          <motion.div 
-            className={styles.content}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.4, 0, 0.2, 1] }}
-          >
+          <div className={styles.content}>
             <h1 className={styles.headline}>
-              Hello, I'm{' '}
+              {part1}
               <motion.span 
                 className={styles.highlight}
                 onMouseEnter={() => setIsHovered(true)}
@@ -130,14 +160,35 @@ export const Hero: React.FC = () => {
                 animate={{ fontWeight: isHovered ? 700 : 400 }}
                 transition={{ duration: 0.2 }}
               >
-                Swarup
+                {part2}
               </motion.span>
+              <motion.span
+                style={{ display: showSubtitle ? 'none' : 'inline-block', width: '4px', height: '1em', backgroundColor: 'var(--text-primary)', marginLeft: '4px', verticalAlign: 'baseline', position: 'relative', top: '2px' }}
+                animate={{ opacity: isTyping ? [1, 0] : 0 }}
+                transition={{ repeat: isTyping ? Infinity : 0, duration: 0.8, ease: "linear" }}
+              />
             </h1>
-            <p className={styles.subtitle}>
-              Engineering scalable platforms.<br />
-              Designing meaningful experiences.
-            </p>
-          </motion.div>
+            
+            <motion.div 
+              className={styles.subtitle}
+              initial="hidden"
+              animate={showSubtitle ? "visible" : "hidden"}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: {
+                  opacity: 1,
+                  transition: { staggerChildren: 0.4 }
+                }
+              }}
+            >
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] } } }}>
+                Engineering scalable platforms.
+              </motion.div>
+              <motion.div variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] } } }}>
+                Designing meaningful experiences.
+              </motion.div>
+            </motion.div>
+          </div>
         </main>
       </div>
 
@@ -145,26 +196,46 @@ export const Hero: React.FC = () => {
       <div className={styles.bottomSection}>
         <motion.div 
           className={styles.buttonGroup}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2, ease: [0.4, 0, 0.2, 1] }}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.15, delayChildren: 0.6 }
+            }
+          }}
         >
-          <Button 
-            icon="download" 
-            style={{ borderRadius: '2rem 0.75rem 0.75rem 2rem', width: 'fit-content', whiteSpace: 'nowrap' }}
-          >
-            Download Resume
-          </Button>
-          <Button 
-            variant="secondary" 
-            icon="mail" 
-            style={{ borderRadius: '0.75rem 2rem 2rem 0.75rem', width: 'fit-content', whiteSpace: 'nowrap' }}
-          >
-            Get in touch with me
-          </Button>
+          <motion.div variants={{ hidden: { opacity: 0, scale: 0.8, y: 20 }, visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 200, damping: 20 } } }}>
+            <Button 
+              icon="download" 
+              style={{ borderRadius: '2rem 0.75rem 0.75rem 2rem', width: 'fit-content', whiteSpace: 'nowrap' }}
+              href="https://drive.google.com/file/d/1SPhjffmYk2aQo3qGoZHaO3hZQZHmsXJ6/view?usp=sharing"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Download Resume
+            </Button>
+          </motion.div>
+          <motion.div variants={{ hidden: { opacity: 0, scale: 0.8, y: 20 }, visible: { opacity: 1, scale: 1, y: 0, transition: { type: "spring", stiffness: 200, damping: 20 } } }}>
+            <Button 
+              variant="secondary" 
+              icon="mail" 
+              style={{ borderRadius: '0.75rem 2rem 2rem 0.75rem', width: 'fit-content', whiteSpace: 'nowrap' }}
+              href="mailto:srpcreates@gmail.com"
+            >
+              Get in touch with me
+            </Button>
+          </motion.div>
         </motion.div>
 
-        <ScrollIndicator />
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1, ease: [0.4, 0, 0.2, 1] }}
+        >
+          <ScrollIndicator />
+        </motion.div>
       </div>
 
       {/* Blur Transition */}
@@ -227,7 +298,7 @@ export const Hero: React.FC = () => {
           </motion.div>
           
           <img 
-            src="/myPhoto.jpg?v=1" 
+            src={`${import.meta.env.BASE_URL}myPhoto.jpg?v=1`} 
             alt="Swarup" 
             className={styles.photoTooltip}
           />
