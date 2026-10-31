@@ -76,9 +76,10 @@ export const useAssistiveScroll = () => {
               }
 
               scrollAnimationRef.current = animate(window.scrollY, targetScrollY, {
-                type: "tween",
-                ease: "easeInOut",
-                duration: 1.2, // Much slower, human-readable speed
+                type: "spring",
+                stiffness: 100, // Reduced for a more natural, physical feeling
+                damping: 20,    // Tuned to prevent overshooting while staying fluid
+                mass: 1,
                 onUpdate: (latest) => window.scrollTo(0, latest),
                 onComplete: () => {
                   isProgrammaticScroll.current = false;

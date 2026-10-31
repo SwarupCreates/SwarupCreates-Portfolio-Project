@@ -23,8 +23,8 @@ export const TopNavBar: React.FC = () => {
   return (
     <header className={styles.header}>
       <motion.div className={styles.headerGradient} style={{ opacity: topGradOpacity }} />
-      
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center', height: '3rem' }}>
+
+      <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
         <motion.span 
           className={styles.tagline}
           style={{ 

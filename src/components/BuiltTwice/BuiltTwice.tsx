@@ -247,7 +247,7 @@ export const BuiltTwice: React.FC = () => {
                   rotate: thoughtState.rotate,
                   scale: mapScale(thoughtState.scale)
                 }}
-                transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: thoughtState.speed * 6, damping: 20 }}
+                transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: 180, damping: 25, mass: 1 }}
               >
                 <ThoughtTextCard style={{ width: '100%', height: '100%' }} />
               </motion.div>
@@ -262,7 +262,7 @@ export const BuiltTwice: React.FC = () => {
                   rotate: codeState.rotate,
                   scale: mapScale(codeState.scale)
                 }}
-                transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: codeState.speed * 6, damping: 20 }}
+                transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: 180, damping: 25, mass: 1 }}
               >
                 <CodeTextCard style={{ width: '100%', height: '100%' }} />
               </motion.div>
@@ -277,7 +277,7 @@ export const BuiltTwice: React.FC = () => {
                     rotate: twiceState.rotate,
                     scale: mapScale(twiceState.scale)
                   }}
-                  transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: twiceState.speed * 6, damping: 20 }}
+                  transition={isScrubbing ? { duration: 0 } : { type: "spring", stiffness: 180, damping: 25, mass: 1 }}
                   style={{ width: '100%', height: '100%' }}
                 >
                   <TwiceTextCard style={{ width: '100%', height: '100%' }} />

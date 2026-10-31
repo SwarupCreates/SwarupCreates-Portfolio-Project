@@ -90,7 +90,7 @@ export const CustomCursor: React.FC = () => {
     };
   }, [cursorX, cursorY]);
 
-  const scaleSpring = { type: "spring", damping: 15, stiffness: 300 } as const;
+  const scaleSpring = { type: "spring", damping: 22, stiffness: 220 } as const;
 
   if (!hasFinePointer) return null;
 
